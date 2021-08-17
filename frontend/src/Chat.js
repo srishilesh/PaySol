@@ -39,8 +39,8 @@ function Chat({ messages }) {
         axios.post('/messages/new', {
             "message": input,
             "name": "qwerty",
-            "timestamp": "some time",
-            "received": true
+            "timestamp": new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }),
+            "received": false
         });
 
         setInput("");
@@ -72,14 +72,12 @@ function Chat({ messages }) {
             <div className="chat_body">
                 {messages.map((message) => (
                     <p className={`chat_message ${message.received && "chat_reciever"}`}>
-                    <span className="chat_name">{message.name}</span>
-
+                         <span className="chat_name">{message.name}</span>
                         {message.message}
-
                         <span className="chat_timestamp">
                             {message.timestamp}
                         </span>
-                </p>
+                    </p>
                 ))}
                 
             </div>

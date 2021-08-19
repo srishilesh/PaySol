@@ -4,7 +4,9 @@ const Pusher = require('pusher');
 const cors = require('cors');
 require('dotenv').config()
 
-const Messages = require('./dbMessenger');
+const Messages = require('./schema/messageDb');
+const Conversation = require('./schema/converstationDb');
+const User = require('./schema/userDb');
 
 const app = express();
 const port = process.env.PORT || 9000;
@@ -48,8 +50,10 @@ db.once('open', () => {
             const messageDetails = change.fullDocument;
             pusher.trigger('messages', 'inserted',
             {
-                name: messageDetails.name,
-                message: messageDetails.message
+                sender: messageDetails.sender,
+                content: messageDetails.content,
+                conversationId: messageDetails.conversationId,
+                timestamp: messageDetails.timestamp
             });
         } else {
             console.log("Error triggering Pusher");
@@ -77,6 +81,18 @@ app.post('/messages/new', (req, res) => {
             res.status(500).send(err)
         } else {
             res.status(201).send(`new message created: \n ${data}`)
+        }
+    })
+})
+
+app.post('/user/new', (req, res) => {
+    const dbMessage = req.body
+
+    User.create(dbMessage, (err, data) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            res.status(201).send(`new user created: \n ${data}`)
         }
     })
 })

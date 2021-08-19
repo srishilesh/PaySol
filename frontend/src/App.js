@@ -17,8 +17,8 @@ function App() {
   }, [])
 
   useEffect(() => {
-   const pusher = new Pusher('b2975d4dc0077112be09', {
-      cluster: 'ap2',
+   const pusher = new Pusher('ea11adf214ecc46819d7', {
+      cluster: 'mt1',
     });
 
     const channel = pusher.subscribe('messages');

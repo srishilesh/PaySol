@@ -7,7 +7,7 @@ import {Grid} from '@material-ui/core';
 
 const Chatscreen = () => {
     return (
-        <Grid container direction="row" justifyContent="space-evenly" alignItems="flex-start">
+        <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start">
             <ConversationManager />
             <ConversationScreen />
             <TransactionArea />

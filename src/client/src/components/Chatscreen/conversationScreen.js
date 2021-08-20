@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 
 const ConversationScreen = () => {
     return (
-        <Grid item xs={6} style={{backgroundColor: 'white'}}>
+        <Grid item xs={5} style={{backgroundColor: 'white'}}>
            <Container>ConversationScreen</Container>
         </Grid>
     );

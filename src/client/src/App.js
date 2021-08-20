@@ -5,6 +5,7 @@ import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import Landingpage from "./pages/landingpage";
 import Newuser from "./pages/newuser";
 import Olduser from "./pages/olduser";
+import Chat from "./pages/chat";
 import './App.css'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -46,7 +47,7 @@ function App() {
           <Route exact path="/" component={Landingpage} />
           <Route path="/newuser" component={Newuser} />
           <Route path="/olduser" component={Olduser} />
-         
+          <Route path="/chat" component={Chat} />
         </div>
       </Router>
     </div>

@@ -33,7 +33,8 @@ const connection_url = process.env.MONGO_CONNECTION_URL;
 mongoose.connect(connection_url, {
     useCreateIndex: true,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 });
 
 const db = mongoose.connection;
@@ -74,6 +75,7 @@ app.get('/messages/sync', (req, res) => {
     })
 })
 
+//Post New Message
 app.post('/messages/new', (req, res) => {
     const dbMessage = req.body
     // sender_id: sender public key
@@ -91,14 +93,15 @@ app.post('/messages/new', (req, res) => {
     })
 })
 
+//Post New User
 app.post('/user/new', (req, res) => {
-    const newMessage = req.body
+    const newUser = req.body
     // sender_id: publickey
     // username: username
     // password: password
     // received_id: receiver public key
 
-    User.create(newMessage, (err, data) => {
+    User.create(newUser, (err, data) => {
         if (err) {
             res.status(500).send(err)
         } else {
@@ -107,6 +110,7 @@ app.post('/user/new', (req, res) => {
     })
 })
 
+//Get all users
 app.get('/users', (req, res) => {
     User.find((err, data) => {
         if (err) {
@@ -117,21 +121,61 @@ app.get('/users', (req, res) => {
     })
 })
 
+//Post New Conversation and update corresponding Users
 app.post('/conversation/new', (req, res) => {
-    const conversationMessage = req.body;
+    const senderId = req.body.senderId;
+
+    const receiverId = req.body.receiverId;
+
     // conversation_id: increment count by one
     // sender_id: sender public key
     // receiver_id: receiver public key
 
-    Conversation.create(conversationMessage, (err, data) => {
+    let conversationId;
+
+    conversationData = {
+        participants: [
+            senderId,
+            receiverId
+        ]
+    }
+
+    Conversation.create(conversationData, (err, data) => {
         if (err) {
             res.status(500).send(err)
         } else {
+            conversationId = data;
+            console.log(conversationId);
+            setConversationId(conversationId._id, senderId);
+            setConversationId(conversationId._id, receiverId);
             res.status(200).send(`new conversation created: \n ${data}`)
         }
     })
+})
 
-    User.findByIdAndUpdate()
+function setConversationId(conversationId, userId) {
+    var query = {_id: userId};
+    newData = {
+        "conversations": conversationId
+    };
+
+    User.findOneAndUpdate(query, {$push: newData}, {upsert: true}, function(err, data) {
+        // if (err) return res.send(500, {error: err});
+        // return res.status(200).send(`conversation updated: \n ${data}`);
+        console.log(data);
+        console.log(err);
+    });
+}
+
+//Get conversation List for an user
+app.get('/user/conversations/', (req, res) => {
+    User.find(req.body ,(err, data) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            res.status(200).send(data[0].conversations)
+        }
+    })
 })
 
 app.listen(port, () => console.log(`Listening on localhost: ${port}`));

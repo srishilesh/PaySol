@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const message = mongoose.Schema({
-    _id: String,
     content: String,
-    sender: String,
+    sender_id: String,
     timestamp: String,
     conversationId: String,
 });

@@ -63,7 +63,7 @@ db.once('open', () => {
     });
 });
 
-app.get('/',(req, res) => res.status(200).send('hello world'));
+app.get('/',(req, res) => res.status(200).send('Server is live'));
 
 app.get('/messages/sync', (req, res) => {
     Messages.find((err, data) => {
@@ -79,7 +79,6 @@ app.get('/messages/sync', (req, res) => {
 app.post('/messages/new', (req, res) => {
     const dbMessage = req.body
     // sender_id: sender public key
-    // sender: sender name
     // content: message
     // conversation_id: conversation id
     // timestamp: timestamp

@@ -6,36 +6,36 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 import axios from './axios';
 
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
-const socket = io('localhost:3001');
+// const socket = io('localhost:3001');
 
 function Chat({ messages }) {
     const [input, setInput] = useState("")
-    const [isConnected, setIsConnected] = useState(socket.connected);
-    const [lastMessage, setLastMessage] = useState(null);
+    // const [isConnected, setIsConnected] = useState(socket.connected);
+    // const [lastMessage, setLastMessage] = useState(null);
 
-    useEffect(() => {
-        socket.on('connect', () => {
-        setIsConnected(true);
-        });
-        socket.on('disconnect', () => {
-        setIsConnected(false);
-        });
-        socket.on('message', data => {
-        setLastMessage(data);
-        });
-        return () => {
-        socket.off('connect');
-        socket.off('disconnect');
-        socket.off('message');
-        };
-    });
+    // useEffect(() => {
+    //     socket.on('connect', () => {
+    //     setIsConnected(true);
+    //     });
+    //     socket.on('disconnect', () => {
+    //     setIsConnected(false);
+    //     });
+    //     socket.on('message', data => {
+    //     setLastMessage(data);
+    //     });
+    //     return () => {
+    //     socket.off('connect');
+    //     socket.off('disconnect');
+    //     socket.off('message');
+    //     };
+    // });
 
     const sendMessage = (e) => {
         e.preventDefault();
 
-        socket.emit('newMessage', {message: input, name: "qwerty"});
+        // socket.emit('newMessage', {message: input, name: "qwerty"});
         axios.post('/messages/new', {
             "message": input,
             "name": "qwerty",

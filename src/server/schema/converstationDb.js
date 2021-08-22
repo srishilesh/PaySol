@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
 const conversation = mongoose.Schema({
-    conversationId: String,
-    participants: [String],
+    participants: [Object]
 })
 
 module.exports = mongoose.model('conversationContents', conversation);

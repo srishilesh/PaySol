@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const user = mongoose.Schema({
-    senderId: String,
-    sender: String,
-    publickey: String,
+    _id: String,
+    username: String,
     password: String,
     conversations: [String],
 })

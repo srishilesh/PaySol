@@ -7,6 +7,7 @@ require('dotenv').config()
 const Messages = require('./schema/messageDb');
 const Conversation = require('./schema/converstationDb');
 const User = require('./schema/userDb');
+const converstationDb = require('./schema/converstationDb');
 
 const app = express();
 const port = process.env.PORT || 9000;
@@ -32,7 +33,8 @@ const connection_url = process.env.MONGO_CONNECTION_URL;
 mongoose.connect(connection_url, {
     useCreateIndex: true,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 });
 
 const db = mongoose.connection;
@@ -61,7 +63,7 @@ db.once('open', () => {
     });
 });
 
-app.get('/',(req, res) => res.status(200).send('hello world'));
+app.get('/',(req, res) => res.status(200).send('Server is live'));
 
 app.get('/messages/sync', (req, res) => {
     Messages.find((err, data) => {
@@ -73,8 +75,13 @@ app.get('/messages/sync', (req, res) => {
     })
 })
 
+//Post New Message
 app.post('/messages/new', (req, res) => {
     const dbMessage = req.body
+    // sender_id: sender public key
+    // content: message
+    // conversation_id: conversation id
+    // timestamp: timestamp
 
     Messages.create(dbMessage, (err, data) => {
         if (err) {
@@ -85,10 +92,15 @@ app.post('/messages/new', (req, res) => {
     })
 })
 
+//Post New User
 app.post('/user/new', (req, res) => {
-    const dbMessage = req.body
+    const newUser = req.body
+    // sender_id: publickey
+    // username: username
+    // password: password
+    // received_id: receiver public key
 
-    User.create(dbMessage, (err, data) => {
+    User.create(newUser, (err, data) => {
         if (err) {
             res.status(500).send(err)
         } else {
@@ -97,4 +109,81 @@ app.post('/user/new', (req, res) => {
     })
 })
 
+//Get all users
+app.get('/users', (req, res) => {
+    User.find((err, data) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            res.status(200).send(data)
+        }
+    })
+})
+
+//Post New Conversation and update corresponding Users
+app.post('/conversation/new', (req, res) => {
+    const sender = req.body.sender;
+
+    const receiver = req.body.receiver;
+
+    // conversation_id: increment count by one
+    // sender_id: sender public key
+    // receiver_id: receiver public key
+
+    let conversationId;
+
+    conversationData = {
+        participants: [
+            sender,
+            receiver
+        ]
+    }
+
+    Conversation.create(conversationData, (err, data) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            conversationId = data;
+            console.log(conversationId);
+            setConversationId(conversationId._id, sender);
+            setConversationId(conversationId._id, receiver);
+            res.status(200).send(`new conversation created: \n ${data}`)
+        }
+    })
+})
+
+function setConversationId(conversationId, user) {
+    var query = {_id: user.id};
+    newData = {
+        "conversations": conversationId
+    };
+
+    User.findOneAndUpdate(query, {$push: newData}, {upsert: true}, function(err, data) {
+        // if (err) return res.send(500, {error: err});
+        // return res.status(200).send(`conversation updated: \n ${data}`);
+        console.log(data);
+        console.log(err);
+    });
+}
+
+//Get conversation List for an user
+app.get('/user/conversations/', (req, res) => {
+    User.find(req.body ,(err, data) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            res.status(200).send(data[0].conversations)
+            // getParticipants()
+        }
+    })
+})
+
+// function getParticipants(conversationId, res) {
+//     Conversation.find({_id: conversationId}, (err, data) => {
+//         if (err) {
+//             res.status(500).send(err)
+//         } else {
+//             res.status(200).send(data[0].participants)
+//         })
+// }
 app.listen(port, () => console.log(`Listening on localhost: ${port}`));

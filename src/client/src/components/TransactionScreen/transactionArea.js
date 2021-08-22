@@ -4,9 +4,8 @@ import Container from '@material-ui/core/Container';
 
 const TransactionArea = () => {
     return (
-        <Grid item xs={3} style={{backgroundColor: 'white'}}>
-            <Container>TransactionArea</Container>
-        </Grid>
+        
+        <Container>TransactionArea</Container>
     );
 }
 

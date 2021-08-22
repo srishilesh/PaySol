@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import { Avatar, IconButton } from '@material-ui/core';
+import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 import axios from './axios';
@@ -24,40 +26,59 @@ const ConversationScreen = ({ messages }) => {
     };
 
     return (
-        <Grid item xs={5} style={{backgroundColor: 'white'}}>
-           <Container>
-                <div className="chat_body">
-                    {messages.map((message) => (
-                        <p className={`chat_message ${message.received && "chat_reciever"}`}>
-                        <span className="chat_name">{message.name}</span>
+        // <Grid item xs={5} style={{backgroundColor: 'white'}}>
+        <div className="chat">
+        <div className="chat_header">
+            <Avatar />
 
-                            {message.message}
+            <div className="chat_headerInfo">
+                <h3>Room name</h3>
+                <p>Last seen ...</p>
+            </div>
 
-                            <span className="chat_timestamp">
-                                {message.timestamp}
-                            </span>
-                    </p>
-                    ))}
-                    
-                </div>
+            <div className="chat_headerRight">
+                <IconButton>
+                    <SearchOutlined />
+                </IconButton>
+                <IconButton>
+                    <AttachFile />
+                </IconButton>
+                <IconButton>
+                    <MoreVert />
+                </IconButton>
+            </div>
+        </div>
 
-                <div className="chat_footer">
-                    <InsertEmoticonIcon />
-                    <form>
-                        <input
-                            value={input}
-                            onChange={e => setInput(e.target.value)}
-                            placeholder="Type a message"
-                            type="text"
-                        />
-                        <button onClick={sendMessage} type="submit">
-                            Send a message
-                        </button>
-                    </form>
-                    <MicIcon />
-                </div>
-           </Container>
-        </Grid>
+        <div className="chat_body">
+            {messages.map((message) => (
+                <p className={`chat_message ${message.received && "chat_reciever"}`}>
+                     <span className="chat_name">{message.name}</span>
+                    {message.message}
+                    <span className="chat_timestamp">
+                        {message.timestamp}
+                    </span>
+                </p>
+            ))}
+            
+        </div>
+
+        <div className="chat_footer">
+            <InsertEmoticonIcon />
+            <form>
+                <input
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
+                    placeholder="Type a message"
+                    type="text"
+                />
+                <button onClick={sendMessage} type="submit">
+                    Send a message
+                </button>
+            </form>
+            <MicIcon />
+        </div>
+    </div>
+        // </Grid>
     );
 }
 

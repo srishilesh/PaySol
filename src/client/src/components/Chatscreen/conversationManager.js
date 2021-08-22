@@ -11,8 +11,7 @@ import SidebarChat from './SidebarChat';
 
 const ConversationManager = () => {
     return (
-        <Grid item xs={4} style={{backgroundColor: 'white'}}>
-            <Container>
+        // <Grid item xs={4} style={{backgroundColor: 'white'}}>
             <div className="sidebar">
             <div className="sidebar_header">
                 <Avatar src="https://avatars3.githubusercontent.com/u/33751325?s=460&u=80a74dab5069f1b66f51e300fe314ba058d96b92&v=4" />
@@ -42,8 +41,7 @@ const ConversationManager = () => {
                 <SidebarChat />
             </div>
         </div>
-            </Container>
-        </Grid>
+        // </Grid>
     );
 }
 

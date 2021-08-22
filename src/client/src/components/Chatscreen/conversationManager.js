@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Grid} from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import './Sidebar.css';
@@ -9,12 +9,35 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import CreateIcon from '@material-ui/icons/Create';
 import SidebarChat from './SidebarChat';
+import axios from './axios';
 
 const ConversationManager = () => {
 
     const handleNewChat = () => {
         
     }
+
+    const [conversation, setConversation] = useState([]);
+
+    useEffect(() => {
+        axios.get('/user/conversations', {_id: "123"})
+        .then(response => {
+            
+            let participantsArray = [];
+
+            for(const participants of response.data) {
+                for(const participant of participants) {
+                    if(participant.id != "123") {
+                        participantsArray.push(participant);
+                    }
+                }
+            }
+
+            console.log(participantsArray);
+
+            setConversation(participantsArray);
+        });
+    }, [])
 
     return (
         // <Grid item xs={4} style={{backgroundColor: 'white'}}>
@@ -42,10 +65,10 @@ const ConversationManager = () => {
             </div>
 
             <div className="sidebar_chats">
-                <SidebarChat />
-                <SidebarChat />
-                <SidebarChat />
-                <SidebarChat />
+                {
+                    conversation.map((participant) => (
+                        <SidebarChat name={participant.name} />
+                    ))}
             </div>
 
             <div className="new_chat">

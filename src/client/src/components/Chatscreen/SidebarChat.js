@@ -1,26 +1,17 @@
 import { Avatar } from "@material-ui/core"
-import React, { useEffect, useState } from 'react';
-import axios from './axios';
+import React from 'react';
 import "./SidebarChat.css";
 
 
-function SidebarChat() {
+function SidebarChat(props) {
 
-    const [conversation, setConversation] = useState([]);
-
-    useEffect(() => {
-        axios.get('/user/conversations', {_id: "123"})
-        .then(response => {
-        console.log(response);
-        setConversation(response.data);
-        });
-    }, [])
+    console.log(props)
 
     return (
         <div className="sidebarChat">
             <Avatar />
             <div className="sidebarChat_info">
-                <h2>Room name</h2>
+                <h2>{props.name}</h2>
                 <p>This is the last message</p>
             </div>
         </div>

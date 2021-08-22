@@ -172,18 +172,31 @@ app.get('/user/conversations/', (req, res) => {
         if (err) {
             res.status(500).send(err)
         } else {
-            res.status(200).send(data[0].conversations)
-            // getParticipants()
+            //res.status(200).send(data[0].conversations)
+            getParticipants(data[0].conversations, res)
         }
     })
 })
 
-// function getParticipants(conversationId, res) {
-//     Conversation.find({_id: conversationId}, (err, data) => {
-//         if (err) {
-//             res.status(500).send(err)
-//         } else {
-//             res.status(200).send(data[0].participants)
-//         })
-// }
+async function getParticipants(conversationId, res) {
+
+    let participants = [];
+
+    for(const i of conversationId) {
+
+        await Conversation.find({_id: i}, (err, data) => {
+            if (err) {
+                res.status(500).send(err)
+            } else {
+                participants.push(data[0].participants)
+            }
+        })
+        
+    }
+
+    console.log(participants);
+
+    res.status(200).send(participants)
+}
+
 app.listen(port, () => console.log(`Listening on localhost: ${port}`));

@@ -91,3 +91,8 @@
     padding: 10px;
     color: gray;
 }
+
+.new_chat {
+    display: flex;
+    justify-content: end;
+}

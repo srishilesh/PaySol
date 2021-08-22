@@ -7,9 +7,15 @@ import { Avatar, IconButton } from '@material-ui/core';
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
+import CreateIcon from '@material-ui/icons/Create';
 import SidebarChat from './SidebarChat';
 
 const ConversationManager = () => {
+
+    const handleNewChat = () => {
+        
+    }
+
     return (
         // <Grid item xs={4} style={{backgroundColor: 'white'}}>
             <div className="sidebar">
@@ -39,7 +45,15 @@ const ConversationManager = () => {
                 <SidebarChat />
                 <SidebarChat />
                 <SidebarChat />
+                <SidebarChat />
             </div>
+
+            <div className="new_chat">
+                <IconButton onClick={handleNewChat}>
+                    <CreateIcon />
+                </IconButton>
+            </div>
+
         </div>
         // </Grid>
     );

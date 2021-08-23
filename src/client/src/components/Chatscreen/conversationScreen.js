@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import { Avatar, IconButton } from '@material-ui/core';
 import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-import MicIcon from "@material-ui/icons/Mic";
+import Button from "@material-ui/core/Button";
 import axios from './axios';
 import './conversationScreen.css';
 
@@ -26,7 +26,6 @@ const ConversationScreen = ({ messages }) => {
     };
 
     return (
-        // <Grid item xs={5} style={{backgroundColor: 'white'}}>
         <div className="chat">
         <div className="chat_header">
             <Avatar />
@@ -63,7 +62,7 @@ const ConversationScreen = ({ messages }) => {
         </div>
 
         <div className="chat_footer">
-            <InsertEmoticonIcon />
+            {/* <InsertEmoticonIcon /> */}
             <form>
                 <input
                     value={input}
@@ -75,10 +74,10 @@ const ConversationScreen = ({ messages }) => {
                     Send a message
                 </button>
             </form>
-            <MicIcon />
+            {/* <MicIcon /> */}
+            <Button variant="contained" color="primary">Send</Button>
         </div>
     </div>
-        // </Grid>
     );
 }
 

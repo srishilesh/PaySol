@@ -6,8 +6,6 @@ import ConversationScreen from './conversationScreen';
 import TransactionArea from '../TransactionScreen/transactionArea'
 import './chatArea.css';
 
-import { Grid } from '@material-ui/core';
-
 const Chatscreen = () => {
 
     const [messages, setMessages] = useState([]);
@@ -39,22 +37,13 @@ const Chatscreen = () => {
     }, [messages]);
 
     return (
-        // <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start">
-        //     <Grid item xs={10}>
-                <div className="app">
-                    <div className="app_body" >
-                        <ConversationManager />
-                        <ConversationScreen messages={messages}/>
-                        {/* <TransactionArea /> */}
-                    </div>
-                </div>
-        //     </Grid>
-        //     <Grid item xs={2} style={{backgroundColor: 'white'}}>
-        //         <div className="app">
-        //             <TransactionArea />
-        //         </div>
-        //     </Grid>
-        // </Grid>
+        <div className="app">
+            <div className="app_body" >
+                <ConversationManager />
+                <ConversationScreen messages={messages}/>
+                {/* <TransactionArea /> */}
+            </div>
+        </div>
     );
 }
 

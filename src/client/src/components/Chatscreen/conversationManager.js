@@ -22,16 +22,13 @@ const ConversationManager = () => {
         .then(response => {
             
             let participantsArray = [];
-
-            for(const participants of response.data) {
-                for(const participant of participants) {
-                    if(participant.id != userReducerData._id) {
-                        participantsArray.push(participant);
-                    }
-                }
-            }
-
-            console.log(participantsArray);
+            
+            response.data.map((participants, index1) => {
+                participants.map((participant, index2) => {
+                    if(participant.id != userReducerData._id)
+                        participantsArray.push(participant)
+                })
+            })
 
             setConversation(participantsArray);
         });

@@ -6,6 +6,8 @@ import store from './store/store'
 
 import App from './App'
 
+console.log('Initial state: ', store);
+
 const rootElement = document.getElementById('root')
 ReactDOM.render(
   <Provider store={store}>

@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {Grid} from '@material-ui/core';
-import Container from '@material-ui/core/Container';
 import './Sidebar.css';
-import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import { Avatar, IconButton } from '@material-ui/core';
-import ChatIcon from "@material-ui/icons/Chat";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import CreateIcon from '@material-ui/icons/Create';
 import SidebarChat from './SidebarChat';
 import axios from './axios';
+import { useSelector } from 'react-redux';
 
 const ConversationManager = () => {
 
@@ -17,17 +13,19 @@ const ConversationManager = () => {
         
     }
 
+    const userReducerData = useSelector(state => state.userReducer);
+    
     const [conversation, setConversation] = useState([]);
 
     useEffect(() => {
-        axios.get('/user/conversations', {_id: "123"})
+        axios.get('/user/conversations', {_id: userReducerData._id})
         .then(response => {
             
             let participantsArray = [];
 
             for(const participants of response.data) {
                 for(const participant of participants) {
-                    if(participant.id != "123") {
+                    if(participant.id != userReducerData._id) {
                         participantsArray.push(participant);
                     }
                 }
@@ -43,6 +41,7 @@ const ConversationManager = () => {
         <div className="sidebar">
             <div className="sidebar_header">
                 <Avatar src="https://avatars3.githubusercontent.com/u/33751325?s=460&u=80a74dab5069f1b66f51e300fe314ba058d96b92&v=4" />
+                <p>{userReducerData.name}</p>
             </div>
 
             <div className="sidebar_search">

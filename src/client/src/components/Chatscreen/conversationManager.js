@@ -25,11 +25,13 @@ const ConversationManager = () => {
             let participantsArray = [];
             
             response.data.map((participants, index1) => {
-                participants.map((participant, index2) => {
+                participants.participants.map((participant, index2) => {
                     if(participant.id != userReducerData._id)
-                        participantsArray.push(participant)
+                        participantsArray.push({participant, "conversationId": participants["conversationId"]})
                 })
             })
+
+            console.log(participantsArray)
 
             setConversation(participantsArray);
         });
@@ -52,7 +54,7 @@ const ConversationManager = () => {
             <div className="sidebar_chats">
                 {
                     conversation.map((participant) => (
-                        <SidebarChat name={participant.name} />
+                        <SidebarChat name={participant.participant.name} conversationId={participant.conversationId} />
                     ))}
             </div>
 

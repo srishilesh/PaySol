@@ -12,7 +12,7 @@ function SidebarChat(props) {
             <Avatar />
             <div className="sidebarChat_info">
                 <h2>{props.name}</h2>
-                {/* <p>This is the last message</p> */}
+                <p>{props.conversationId}</p>
             </div>
         </div>
     );

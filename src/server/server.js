@@ -188,7 +188,7 @@ async function getParticipants(conversationId, res) {
             if (err) {
                 res.status(500).send(err)
             } else {
-                participants.push(data[0].participants)
+                participants.push({participants:data[0].participants, conversationId: i})
             }
         })
         

@@ -6,7 +6,9 @@ import store from './store/store'
 
 import App from './App'
 
-console.log('Initial state: ', store);
+console.log('Initial state: ', store.getState());
+// store.dispatch({type: 'SET_CONVERSATION_ID', payload: '123'})
+// console.log('Dispatched state: ', store.getState());
 
 const rootElement = document.getElementById('root')
 ReactDOM.render(

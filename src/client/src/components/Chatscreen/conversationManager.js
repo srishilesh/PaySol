@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Sidebar.css';
+import Pusher from 'pusher-js';
 import { Avatar, IconButton } from '@material-ui/core';
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import CreateIcon from '@material-ui/icons/Create';
@@ -7,24 +8,78 @@ import SidebarChat from './SidebarChat';
 import axios from './axios';
 import { useSelector } from 'react-redux';
 
-const ConversationManager = () => {
+const ConversationManager = (props) => {
 
     const handleNewChat = () => {
-        
+        console.log("New chat");
+
+        let body = {
+            sender: {
+                "id": "123",
+                "name": "harshak"
+            },
+            receiver: {
+                "id": "987",
+                "name": "aadhi"
+            }
+        }
+
+        axios.post('/conversation/new', body)
+            .then(response => {
+                console.log(response);
+            })
+
     }
 
     const userReducerData = useSelector(state => state.userReducer);
     
     const [conversation, setConversation] = useState([]);
+    const [conversationData, setConversationData] = useState([]);
 
     useEffect(() => {
-        console.log(userReducerData)
+
         axios.get('/user/conversations', {_id: userReducerData._id})
         .then(response => {
+            console.log("constructor");
+            setConversationData(response.data);
+            participantsFormatter(response.data);
+
+        });
+
+    }, [])
+
+    useEffect(() => {
+        const pusher = new Pusher('ea11adf214ecc46819d7', {
+            cluster: 'mt1',
+            });
+    
+            const channel = pusher.subscribe('conversations');
+            channel.bind('inserted', function(newConversation) {
+            alert(JSON.stringify(newConversation));
             
-            let participantsArray = [];
+            for(const i of newConversation.participants) {
+                if(i.id == userReducerData._id) {
+                    participantsFormatter([...conversationData, newConversation]);
+                    break;
+                }
+            }
+
+            // setConversation([...conversation, newConversation]);
+            });
+    
+            return () => {
+            channel.unbind_all();
+            channel.unsubscribe();
+            }
+    
+        }, [conversation]);
+
+    function participantsFormatter(response) {
+        let participantsArray = [];
+
+            console.log(response)
             
-            response.data.map((participants, index1) => {
+            response.map((participants, index1) => {
                 participants.participants.map((participant, index2) => {
                     if(participant.id != userReducerData._id)
                         participantsArray.push({participant, "conversationId": participants["conversationId"]})
@@ -33,9 +88,8 @@ const ConversationManager = () => {
 
             console.log(participantsArray)
 
-            setConversation(participantsArray);
-        });
-    }, [])
+            setConversation(participantsArray.reverse());
+    }
 
     return (
         <div className="sidebar">
@@ -53,8 +107,8 @@ const ConversationManager = () => {
 
             <div className="sidebar_chats">
                 {
-                    conversation.map((participant) => (
-                        <SidebarChat name={participant.participant.name} conversationId={participant.conversationId} />
+                    conversation.map((participant, key) => (
+                        <SidebarChat syncFunction={props.syncFunction} key={key} name={participant.participant.name} conversationId={participant.conversationId} />
                     ))}
             </div>
 

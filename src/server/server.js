@@ -61,12 +61,32 @@ db.once('open', () => {
             console.log("Error triggering Pusher");
         }
     });
+
+    const conCollection = db.collection('conversationcontents');
+    const changeStreamConversation = conCollection.watch(); 
+
+    changeStreamConversation.on('change', (change) => {
+        console.log("change occured", change);
+
+        if (change.operationType === 'insert') {
+            const conversationDetails = change.fullDocument;
+            pusher.trigger('conversations', 'inserted',
+            {
+                conversationId: conversationDetails._id,
+                participants: conversationDetails.participants
+            });
+        } else {
+            console.log("Error triggering Pusher");
+        }
+    });
+
 });
 
 app.get('/',(req, res) => res.status(200).send('Server is live'));
 
-app.get('/messages/sync', (req, res) => {
-    Messages.find((err, data) => {
+app.post('/messages/sync', (req, res) => {
+
+    Messages.find(req.body, (err, data) => {
         if (err) {
             res.status(500).send(err)
         } else {
@@ -98,7 +118,6 @@ app.post('/user/new', (req, res) => {
     // sender_id: publickey
     // username: username
     // password: password
-    // received_id: receiver public key
 
     User.create(newUser, (err, data) => {
         if (err) {

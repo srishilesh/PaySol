@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { Grid } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
 import { Avatar, IconButton } from '@material-ui/core';
 import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
-import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import Button from "@material-ui/core/Button";
 import axios from './axios';
 import './conversationScreen.css';
+import { useSelector } from 'react-redux';
 
 const ConversationScreen = ({ messages }) => {
 
-    const [input, setInput] = useState("")
+    const [input, setInput] = useState("");
+    const selectedConversationIdData = useSelector(state => state.selectedConversationReducer)
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -19,7 +18,7 @@ const ConversationScreen = ({ messages }) => {
             "message": input,
             "sender_id": "123",
             "timestamp": new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }),
-            "conversationId": "61222b82a8a98c256c58d84e"
+            "conversationId": selectedConversationIdData.conversation_id
         });
 
         setInput("");
@@ -49,8 +48,8 @@ const ConversationScreen = ({ messages }) => {
         </div>
 
         <div className="chat_body">
-            {messages.map((message) => (
-                <p className={`chat_message ${(message.sender_id == "123") && "chat_reciever"}`}>
+            {messages.map((message, key) => (
+                <p key={key} className={`chat_message ${(message.sender_id == "123") && "chat_reciever"}`}>
                      <span className="chat_name">{message.sender_id}</span>
                     {message.message}
                     <span className="chat_timestamp">

@@ -10,6 +10,7 @@ function SidebarChat(props) {
 
     const handleOnClick = () => {
         dispatch({type: SET_CONVERSATION_ID, payload: props.conversationId});
+        props.syncFunction()
     }
 
     return (

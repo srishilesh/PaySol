@@ -10,17 +10,32 @@ import './chatArea.css';
 const Chatscreen = () => {
 
     const userReducerData = useSelector(state => state.userReducer);
+    const selectedConversationIdData = useSelector(state => state.selectedConversationReducer)
 
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        console.log(userReducerData)
-        axios.get('/messages/sync')
+
+        let body = {conversationId: selectedConversationIdData.conversation_id};
+        console.log("Conversation "+ selectedConversationIdData.conversation_id);
+
+        axios.post('/messages/sync', body)
         .then(response => {
         console.log(response);
         setMessages(response.data);
         });
+
     }, [])
+
+    function syncFunction() {
+        let body = {conversationId: selectedConversationIdData.conversation_id};
+        console.log("Conversation "+ selectedConversationIdData.conversation_id);
+
+        axios.post('/messages/sync', body)
+        .then(response => {
+        setMessages(response.data);
+        });
+    }
 
     useEffect(() => {
     const pusher = new Pusher('ea11adf214ecc46819d7', {
@@ -29,7 +44,7 @@ const Chatscreen = () => {
 
         const channel = pusher.subscribe('messages');
         channel.bind('inserted', function(newMessage) {
-        alert(JSON.stringify(newMessage));
+        //alert(JSON.stringify(newMessage));
         setMessages([...messages, newMessage]);
         });
 
@@ -43,7 +58,7 @@ const Chatscreen = () => {
     return (
         <div className="app">
             <div className="app_body" >
-                <ConversationManager />
+                <ConversationManager syncFunction={syncFunction} />
                 <ConversationScreen messages={messages}/>
                 {/* <TransactionArea /> */}
             </div>

@@ -17,9 +17,9 @@ const ConversationScreen = ({ messages }) => {
 
         axios.post('/messages/new', {
             "message": input,
-            "name": "qwerty",
-            "timestamp": "some time",
-            "received": true
+            "sender_id": "123",
+            "timestamp": new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }),
+            "conversationId": "61222b82a8a98c256c58d84e"
         });
 
         setInput("");
@@ -50,8 +50,8 @@ const ConversationScreen = ({ messages }) => {
 
         <div className="chat_body">
             {messages.map((message) => (
-                <p className={`chat_message ${message.received && "chat_reciever"}`}>
-                     <span className="chat_name">{message.name}</span>
+                <p className={`chat_message ${(message.sender_id == "123") && "chat_reciever"}`}>
+                     <span className="chat_name">{message.sender_id}</span>
                     {message.message}
                     <span className="chat_timestamp">
                         {message.timestamp}

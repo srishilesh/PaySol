@@ -4,13 +4,17 @@ import axios from './axios';
 import ConversationManager from './conversationManager';
 import ConversationScreen from './conversationScreen';
 import TransactionArea from '../TransactionScreen/transactionArea'
+import { useSelector } from 'react-redux';
 import './chatArea.css';
 
 const Chatscreen = () => {
 
+    const userReducerData = useSelector(state => state.userReducer);
+
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
+        console.log(userReducerData)
         axios.get('/messages/sync')
         .then(response => {
         console.log(response);
@@ -19,13 +23,13 @@ const Chatscreen = () => {
     }, [])
 
     useEffect(() => {
-    const pusher = new Pusher('b2975d4dc0077112be09', {
-        cluster: 'ap2',
+    const pusher = new Pusher('ea11adf214ecc46819d7', {
+        cluster: 'mt1',
         });
 
         const channel = pusher.subscribe('messages');
         channel.bind('inserted', function(newMessage) {
-        //alert(JSON.stringify(newMessage));
+        alert(JSON.stringify(newMessage));
         setMessages([...messages, newMessage]);
         });
 

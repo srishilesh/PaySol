@@ -18,6 +18,7 @@ const ConversationManager = () => {
     const [conversation, setConversation] = useState([]);
 
     useEffect(() => {
+        console.log(userReducerData)
         axios.get('/user/conversations', {_id: userReducerData._id})
         .then(response => {
             

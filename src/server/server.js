@@ -198,7 +198,7 @@ function setConversationId(conversationId, user) {
 }
 
 //Get conversation List for an user
-app.get('/user/conversations/', (req, res) => {
+app.post('/user/conversations/', (req, res) => {
     User.find(req.body ,(err, data) => {
         if (err) {
             res.status(500).send(err)

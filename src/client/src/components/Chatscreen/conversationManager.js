@@ -99,7 +99,7 @@ const ConversationManager = (props) => {
 
     useEffect(() => {
 
-        axios.get('/user/conversations', {_id: userReducerData._id})
+        axios.post('/user/conversations', {_id: userReducerData._id})
         .then(response => {
             console.log("constructor");
             setConversationData(response.data);

@@ -62,7 +62,7 @@ const Chatscreen = () => {
             <div className="app_body" >
                 <ConversationManager syncFunction={syncFunction} />
                 <ConversationScreen messages={messages} />
-                {/* <TransactionArea /> */}
+                <TransactionArea />
             </div>
         </div>
     );

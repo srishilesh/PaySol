@@ -11,25 +11,24 @@ import QRCode from "qrcode.react";
 
 const styles = (theme) => ({
   root: {
-    textAlign: "center"
+    textAlign: "center",
   },
   layout: {
     width: "auto",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
+    [theme.breakpoints.up(300 + theme.spacing(2) * 2)]: {
+      width: 300,
       marginLeft: "auto",
       marginRight: "auto",
     },
   },
   paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
+    marginTop: theme.spacing(1),
     padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
       marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(6),
+      marginBottom: theme.spacing(1),
       padding: theme.spacing(3),
     },
   },
@@ -66,7 +65,7 @@ class accountinfo extends Component {
         includeMargin={true}
       />
           <Typography component="h1" variant="h4" align="center">
-           Kaipulla
+           {this.props.name}
           </Typography>
           <Typography variant="body2" align="center" color="textSecondary" noWrap>
           {this.state.pk.toString()}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -16,8 +16,16 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import * as solanaWeb3 from "@solana/web3.js";
+import * as bs from "bs58";
 
 import Chatscreen from '../components/Chatscreen';
+
+import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
+import {SET_USER} from '../constants/actionTypes';
+
 
 const drawerWidth = 240;
 
@@ -83,10 +91,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Chat = () => {
+
+const Chat = (props) => {
+  
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [isloading , setLoading]=React.useState(false)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+  
+  if (localStorage.getItem("secretkey") != null) {
+  
+  var pk = new solanaWeb3.Account(
+    bs.decode(localStorage.getItem("secretkey"))
+  );
+  console.log(localStorage.getItem("secretkey"));
+  let detail={
+   _id:pk.publicKey.toString(),
+   name:localStorage.getItem("name"),
+   pk:pk.publicKey
+  }
+  console.log(detail)
+  dispatch({type: SET_USER, payload: detail});
+  setLoading(true)
+  }
+  else{
+  props.history.push("/");
+  }
+  
+  }, [])
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -96,6 +131,9 @@ const Chat = () => {
     setOpen(false);
   };
 
+
+ 
+  if(isloading)
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -156,6 +194,10 @@ const Chat = () => {
       </main>
     </div>
   );
+  else
+  return(<div className={classes.root}><CircularProgress /></div>)
+
+  
 }
 
 export default Chat;

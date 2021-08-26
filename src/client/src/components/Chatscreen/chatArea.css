@@ -10,6 +10,6 @@ display: flex;
 background-color: #ededed;
 margin-top: -10px;
 height: 85vh;
-width: 90vw;
+width: 100%;
 box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);
 }

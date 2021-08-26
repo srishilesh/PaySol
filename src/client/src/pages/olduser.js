@@ -17,6 +17,9 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
+
+import axios from '../components/Chatscreen/axios';
+
 const styles = (theme) => ({
     root: {
       display: "flex",
@@ -72,7 +75,24 @@ class olduser extends Component {
     console.log(this.state.publicaddress);
     const info = await getAccountInfo(address.publicKey);
     localStorage.setItem("secretkey", bs.encode(this.state.privateaddress));
-    this.props.history.push("/");
+   
+    let body={
+      _id:this.state.publicaddress
+    }
+    axios.post('/finduser', body)
+    .then(response => {
+    if(response.data.password==this.state.password)
+    {
+    localStorage.setItem("secretkey", bs.encode(this.state.privateaddress));
+    localStorage.setItem("name", response.data.username);
+    localStorage.setItem("password", response.data.password);
+    this.props.history.push("/chat");
+    }
+    else
+    alert("Incorrect password")
+    });
+
+  
   };
 
   render() {

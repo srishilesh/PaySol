@@ -17,6 +17,9 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
+
+import axios from '../components/Chatscreen/axios';
+
 const styles = (theme) => ({
   root: {
     display: "flex",
@@ -88,7 +91,20 @@ class newuser extends Component {
     localStorage.setItem("secretkey", bs.encode(this.state.privateaddress));
     localStorage.setItem("name", this.state.name);
     localStorage.setItem("password", this.state.password);
-    this.props.history.push("/");
+    let body = {
+     _id:this.state.publicaddress,
+     username:this.state.name,
+     password:this.state.password,
+     conversationId:[]
+    };
+    console.log(body);
+
+    axios.post('/user/new', body)
+    .then(response => {
+    // console.log(response.data)
+    this.props.history.push("/chat");
+    });
+    
   };
 
   handleChange = (event) => {

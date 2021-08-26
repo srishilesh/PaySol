@@ -139,6 +139,18 @@ app.get('/users', (req, res) => {
     })
 })
 
+
+app.post('/finduser', (req, res) => {
+    User.findOne(req.body,(err, data) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            res.status(200).send(data)
+        }
+    })
+})
+
+
 //Post New Conversation and update corresponding Users
 app.post('/conversation/new', (req, res) => {
     const sender = req.body.sender;
@@ -207,6 +219,7 @@ async function getParticipants(conversationId, res) {
             if (err) {
                 res.status(500).send(err)
             } else {
+                if(data[0]!=null)
                 participants.push({participants:data[0].participants, conversationId: i})
             }
         })

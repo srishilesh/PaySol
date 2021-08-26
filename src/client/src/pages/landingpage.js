@@ -54,7 +54,7 @@ class landingpage extends Component {
           </div>
         ) : (
           <div>
-            <Home title={this.state.pk}></Home>
+            {this.props.history.push("/chat")}
           </div>
         )}
       </div>

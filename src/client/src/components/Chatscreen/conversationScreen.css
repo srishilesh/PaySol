@@ -35,6 +35,17 @@
     overflow-x: hidden;
 }
 
+.chat_body1 {
+    flex: 1;
+    height:224px;
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fi.imgur.com%2F1Rg03go.png&f=1&nofb=1');
+    background-repeat: repeat;
+    background-position: center;
+    padding: 30px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
 .chat_message {
     position: relative;
     font-size: 16px;

@@ -1,11 +1,19 @@
+import {SET_USER} from '../../constants/actionTypes';
+
 const initialState = {
-    name: "Shilesh",
-    _id: "123",
-    conversationId: "61222b82a8a98c256c58d84e"
+    name: "",
+    _id: "",
+    pk : null
 };
 
 const userReducer = (state = initialState, action) => {
+    console.log(action.payload)
     switch(action.type) {
+        case SET_USER:
+            state.name=action.payload.name
+            state._id=action.payload._id
+            state.pk=action.payload.pk
+            return state;
         default:
             return initialState;
     }

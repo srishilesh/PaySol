@@ -6,11 +6,14 @@ import axios from './axios';
 import './conversationScreen.css';
 import { useSelector } from 'react-redux';
 
+import  Send from '../sendtransaction'
+
 const ConversationScreen = ({ messages }) => {
 
     const [input, setInput] = useState("");
     const selectedConversationIdData = useSelector(state => state.selectedConversationReducer)
-
+    const userReducerData = useSelector(state => state.userReducer);
+    
     const sendMessage = (e) => {
         e.preventDefault();
 
@@ -30,8 +33,7 @@ const ConversationScreen = ({ messages }) => {
             <Avatar />
 
             <div className="chat_headerInfo">
-                <h3>Room name</h3>
-                <p>Last seen ...</p>
+                <h3>{selectedConversationIdData.name}</h3>
             </div>
 
             <div className="chat_headerRight">
@@ -74,7 +76,7 @@ const ConversationScreen = ({ messages }) => {
                 </button>
             </form>
             {/* <MicIcon /> */}
-            <Button variant="contained" color="primary">Send</Button>
+         <Send/>
         </div>
     </div>
     );

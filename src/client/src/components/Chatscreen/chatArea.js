@@ -14,6 +14,8 @@ const Chatscreen = () => {
 
     const [messages, setMessages] = useState([]);
 
+    console.log(userReducerData)
+
     useEffect(() => {
 
         let body = {conversationId: selectedConversationIdData.conversation_id};
@@ -59,7 +61,7 @@ const Chatscreen = () => {
         <div className="app">
             <div className="app_body" >
                 <ConversationManager syncFunction={syncFunction} />
-                <ConversationScreen messages={messages}/>
+                <ConversationScreen messages={messages} />
                 {/* <TransactionArea /> */}
             </div>
         </div>

@@ -7,9 +7,13 @@ import {SET_CONVERSATION_ID} from '../../constants/actionTypes';
 
 function SidebarChat(props) {
     const dispatch = useDispatch();
-
+    let detail={
+        conversationId:props.conversationId,
+        toaddress:props.userid,
+        name:props.name
+    }
     const handleOnClick = () => {
-        dispatch({type: SET_CONVERSATION_ID, payload: props.conversationId});
+        dispatch({type: SET_CONVERSATION_ID, payload:detail});
         props.syncFunction()
     }
 

@@ -15,7 +15,7 @@ class home extends Component {
     render() {
         return (
             <div>
-            <Accountinfo title={this.state.pk}/>
+            {/* <Accountinfo title={this.state.pk}/> */}
             <Transaction/>
             <Viewtransaction/>
             </div>

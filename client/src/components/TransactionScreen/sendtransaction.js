@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import "../Chatscreen/ConversationScreen/conversationScreen"
+import Snackbars from '../Snackbar';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -34,6 +35,7 @@ export default function Sendtransaction() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [isloading, setLoading] = React.useState(true);
+  const [notification, setNotification] = React.useState(0);
   const [value, setvalue] = React.useState(0);
   const handleOpen = () => {
     setOpen(true);
@@ -59,21 +61,18 @@ export default function Sendtransaction() {
     var info = await getAccountInfo(pk.publicKey)
     var info = info / solanaWeb3.LAMPORTS_PER_SOL
     const totalsol = Number(amount) + Number(0.000005)
-    console.log(totalsol)
-    console.log(info)
-    console.log(to)
+    // console.log(totalsol)
+    // console.log(info)
+    // console.log(to)
     if (info >= totalsol) {
       setLoading(false)
       var status = await Transaction(from, to, amount, bs.decode(localStorage.getItem('secretkey')))
-      alert("Transaction Successfull")
+      setNotification(1);
       console.log(status)
       setOpen(false);
-
     }
     else
-      alert("insufficient balance")
-
-
+      setNotification(2);
   };
 
   return (
@@ -83,6 +82,8 @@ export default function Sendtransaction() {
           pay
         </Button>
       </div>
+      {notification === 1 ? <Snackbars type="success" /> : null}
+      {notification === 2 ? <Snackbars type="error" /> : null}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

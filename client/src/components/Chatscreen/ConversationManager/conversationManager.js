@@ -150,7 +150,7 @@ const ConversationManager = (props) => {
     return (
         <div className="sidebar">
             <div className="sidebar_header">
-                <Avatar src="https://avatars3.githubusercontent.com/u/33751325?s=460&u=80a74dab5069f1b66f51e300fe314ba058d96b92&v=4" />
+                <Avatar>{userReducerData.name[0]}</Avatar>
                 <p>{userReducerData.name}</p>
             </div>
 
@@ -189,7 +189,7 @@ const ConversationManager = (props) => {
                     <Fade in={open}>
                         <div className={classes.paper}>
                             <Typography variant="h5" align="center" color="textSecondary" style={{ marginTop: 20 }} noWrap>
-                                Add New User
+                                Chat with a new user
                             </Typography>
                             <br />
                             <TextField
@@ -211,7 +211,7 @@ const ConversationManager = (props) => {
                                     handleNewChat()
                                 }}
                             >
-                                Add  User
+                                Start chat
                             </Button>
 
                         </div>

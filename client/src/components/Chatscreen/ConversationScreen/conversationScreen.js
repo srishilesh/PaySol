@@ -30,7 +30,7 @@ const ConversationScreen = ({ messages }) => {
         <div className="chat">
 
             {(selectedConversationIdData.conversation_id !== -1) ? (<div className="chat_header">
-                <Avatar />
+                <Avatar>{selectedConversationIdData.name[0]}</Avatar>
                 <div className="chat_headerInfo">
                     <h3>{selectedConversationIdData.name}</h3>
                 </div>

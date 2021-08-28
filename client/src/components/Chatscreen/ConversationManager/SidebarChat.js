@@ -19,7 +19,7 @@ function SidebarChat(props) {
 
     return (
         <div className="sidebarChat" onClick={handleOnClick}>
-            <Avatar />
+            <Avatar>{props.name[0]}</Avatar>
             <div className="sidebarChat_info">
                 <h2>{props.name}</h2>
             </div>

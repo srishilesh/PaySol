@@ -132,7 +132,7 @@ export default function Sendtransaction() {
                   <br />
                   <br />
                   <Typography variant="body2" align="center" color="textSecondary" noWrap>
-                    `Total: {Number(value) + Number(0.000005)}`
+                    Total: {Number(value) + Number(0.000005)}
                   </Typography>
                   <Button
                     variant="contained"

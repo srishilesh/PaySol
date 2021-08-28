@@ -12,6 +12,7 @@ const ConversationScreen = ({ messages }) => {
     const [input, setInput] = useState("");
     const selectedConversationIdData = useSelector(state => state.selectedConversationReducer)
     const userReducerData = useSelector(state => state.userReducer);
+    const disabled = (selectedConversationIdData.toaddress === "");
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -29,7 +30,8 @@ const ConversationScreen = ({ messages }) => {
     return (
         <div className="chat">
 
-            {(selectedConversationIdData.conversation_id !== -1) ? (<div className="chat_header">
+            {(selectedConversationIdData.conversation_id !== -1) ? (
+            <div className="chat_header">
                 <Avatar>{selectedConversationIdData.name[0]}</Avatar>
                 <div className="chat_headerInfo">
                     <h3>{selectedConversationIdData.name}</h3>
@@ -50,22 +52,22 @@ const ConversationScreen = ({ messages }) => {
             </div>
 
             <div className="chat_footer">
-                {/* <InsertEmoticonIcon /> */}
                 <form>
                     <input
                         value={input}
                         onChange={e => setInput(e.target.value)}
                         placeholder="Type a message"
                         type="text"
+                        disabled={disabled}
                     />
                     <button onClick={sendMessage} type="submit">
                         Send a message
                     </button>
                 </form>
-                <Button variant="contained" color="primary" onClick={sendMessage}>
+                <Button variant="contained" color="primary" onClick={sendMessage} disabled={disabled}>
                     <TelegramIcon />
                 </Button>
-                <Send />
+                {disabled ? null : <Send />}
             </div>
         </div>
     );

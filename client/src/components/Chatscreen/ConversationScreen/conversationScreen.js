@@ -12,7 +12,7 @@ const ConversationScreen = ({ messages }) => {
     const [input, setInput] = useState("");
     const selectedConversationIdData = useSelector(state => state.selectedConversationReducer)
     const userReducerData = useSelector(state => state.userReducer);
-    
+
     const sendMessage = (e) => {
         e.preventDefault();
 
@@ -28,56 +28,44 @@ const ConversationScreen = ({ messages }) => {
 
     return (
         <div className="chat">
-        <div className="chat_header">
-            <Avatar />
 
-            <div className="chat_headerInfo">
-                <h3>{selectedConversationIdData.name}</h3>
+            {(selectedConversationIdData.conversation_id !== -1) ? (<div className="chat_header">
+                <Avatar />
+                <div className="chat_headerInfo">
+                    <h3>{selectedConversationIdData.name}</h3>
+                </div>
+            </div>) : (<div />)}
+
+            <div className="chat_body">
+                {messages.map((message, key) => (
+                    <p key={key} className={`chat_message ${(message.sender_id == "123") && "chat_reciever"}`}>
+                        <span className="chat_name">{message.sender_id}</span>
+                        {message.message}
+                        <span className="chat_timestamp">
+                            {message.timestamp}
+                        </span>
+                    </p>
+                ))}
+
             </div>
 
-            <div className="chat_headerRight">
-                <IconButton>
-                    <SearchOutlined />
-                </IconButton>
-                <IconButton>
-                    <AttachFile />
-                </IconButton>
-                <IconButton>
-                    <MoreVert />
-                </IconButton>
+            <div className="chat_footer">
+                {/* <InsertEmoticonIcon /> */}
+                <form>
+                    <input
+                        value={input}
+                        onChange={e => setInput(e.target.value)}
+                        placeholder="Type a message"
+                        type="text"
+                    />
+                    <button onClick={sendMessage} type="submit">
+                        Send a message
+                    </button>
+                </form>
+                {/* <MicIcon /> */}
+                <Send />
             </div>
         </div>
-
-        <div className="chat_body">
-            {messages.map((message, key) => (
-                <p key={key} className={`chat_message ${(message.sender_id == "123") && "chat_reciever"}`}>
-                     <span className="chat_name">{message.sender_id}</span>
-                    {message.message}
-                    <span className="chat_timestamp">
-                        {message.timestamp}
-                    </span>
-                </p>
-            ))}
-            
-        </div>
-
-        <div className="chat_footer">
-            {/* <InsertEmoticonIcon /> */}
-            <form>
-                <input
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
-                    placeholder="Type a message"
-                    type="text"
-                />
-                <button onClick={sendMessage} type="submit">
-                    Send a message
-                </button>
-            </form>
-            {/* <MicIcon /> */}
-         <Send/>
-        </div>
-    </div>
     );
 }
 

@@ -1,7 +1,24 @@
 import React, { Component } from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
 import * as solanaWeb3 from "@solana/web3.js";
 import * as bs from "bs58";
 import '../../components/Chatscreen/ConversationScreen/conversationScreen.css'
+
+function getAccountDetails(transaction, publickey) {
+  if (transaction.transaction.message.accountKeys[0].toString() == publickey) {
+    return [transaction.transaction.message.accountKeys[1].toString(), 0, (transaction.meta.preBalances[0] - transaction.meta.postBalances[0]) / 1000000000]
+  } else {
+    return [transaction.transaction.message.accountKeys[0].toString(), 1, (transaction.meta.postBalances[1] - transaction.meta.preBalances[1]) / 1000000000]
+  }
+}
 
 class viewtransaction extends Component {
   constructor(props) {
@@ -12,6 +29,7 @@ class viewtransaction extends Component {
       loading: true,
     };
   }
+
 
   async componentDidMount() {
     var con = new solanaWeb3.Connection("https://api.devnet.solana.com/");
@@ -35,20 +53,32 @@ class viewtransaction extends Component {
 
   render() {
 
-    if (this.state.loading) return <p>loading</p>;
+    if (this.state.loading) return <p>Loading...</p>;
     else
       return (
-        <div className="chat_body1">
-          {this.state.transaction.map((transaction) => {
-            if (transaction.transaction.message.accountKeys[0].toString() == this.state.publickey) {
-              console.log(transaction);
-              return <p>{transaction.transaction.message.accountKeys[1].toString()}  - {(transaction.meta.preBalances[0] - transaction.meta.postBalances[0]) / 1000000000} </p>
-            } else {
-              return <p>{transaction.transaction.message.accountKeys[0].toString()} + {(transaction.meta.postBalances[1] - transaction.meta.preBalances[1]) / 1000000000}</p>
-            }
-          }
-
-          )}
+        <div>
+          <TableContainer style={{maxHeight: 225}}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Public Key</TableCell>
+                  <TableCell>Amount</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {this.state.transaction.map((transaction) => {
+                  var transactionDetails = getAccountDetails(transaction, this.state.publickey)
+                  return (
+                    <TableRow hover>
+                      <TableCell style={{wordWrap: 'break-word'}}>{transactionDetails[0]}</TableCell>
+                      <TableCell style={(transactionDetails[1] == 0) ? {backgroundColor:'red'} : {backgroundColor: 'green'}}>{transactionDetails[2]}</TableCell>
+                    </TableRow>
+                  )
+                }
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       );
   }

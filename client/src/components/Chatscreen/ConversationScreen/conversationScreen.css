@@ -1,7 +1,7 @@
 .chat {
     display: flex;
     flex-direction: column;
-    flex: 0.55;
+    flex: 1;
 }
 
 .chat_header {
@@ -13,7 +13,7 @@
 
 .chat_headerInfo {
     flex: 1;
-    padding-left: 20px;
+    padding: 20px;
 }
 
 .chat_headerInfo > h3 {
@@ -36,14 +36,15 @@
 }
 
 .chat_body1 {
-    flex: 1;
-    height:224px;
-    background-image: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fi.imgur.com%2F1Rg03go.png&f=1&nofb=1');
+    width: 65vh
+    /* flex: 1; */
+    /* height:224px; */
+    /* background-image: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fi.imgur.com%2F1Rg03go.png&f=1&nofb=1');
     background-repeat: repeat;
     background-position: center;
     padding: 30px;
     overflow: scroll;
-    overflow-x: hidden;
+    overflow-x: hidden; */
 }
 
 .chat_message {

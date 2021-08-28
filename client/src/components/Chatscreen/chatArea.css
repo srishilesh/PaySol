@@ -1,14 +1,12 @@
 .app {
 display: grid;
 place-items: center;
-height: 90vh;
 background-color: #dadbd3;
 }
 
 .app_body {
 display: flex;
 background-color: #ededed;
-margin-top: -10px;
 height: 85vh;
 width: 100%;
 box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);

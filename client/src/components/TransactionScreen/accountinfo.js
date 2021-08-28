@@ -12,22 +12,23 @@ const styles = (theme) => ({
   },
   layout: {
     width: "auto",
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up(300 + theme.spacing(2) * 2)]: {
-      width: 300,
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    // [theme.breakpoints.up(300 + theme.spacing(2) * 2)]: {
+    //   width: 300,
+    //   marginLeft: "auto",
+    //   marginRight: "auto",
+    // },
   },
   paper: {
     marginTop: theme.spacing(1),
     padding: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(1),
-      padding: theme.spacing(3),
-    },
+    // [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+    //   marginTop: theme.spacing(6),
+    //   marginBottom: theme.spacing(1),
+    //   padding: theme.spacing(3),
+    // },
   },
 });
 

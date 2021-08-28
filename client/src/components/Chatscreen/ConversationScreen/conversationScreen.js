@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from '../axios';
-import { Avatar, IconButton } from '@material-ui/core';
-import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
+import { Avatar, Button } from '@material-ui/core';
+import TelegramIcon from '@material-ui/icons/Telegram';
 
 import './conversationScreen.css';
 import Send from '../../TransactionScreen/sendtransaction'
@@ -62,7 +62,9 @@ const ConversationScreen = ({ messages }) => {
                         Send a message
                     </button>
                 </form>
-                {/* <MicIcon /> */}
+                <Button variant="contained" color="primary" onClick={sendMessage}>
+                    <TelegramIcon />
+                </Button>
                 <Send />
             </div>
         </div>

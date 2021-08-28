@@ -3,7 +3,7 @@ import './Sidebar.css';
 import Pusher from 'pusher-js';
 import { Avatar, IconButton } from '@material-ui/core';
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
-import CreateIcon from '@material-ui/icons/Create';
+import AddIcon from '@material-ui/icons/Add';
 import SidebarChat from './SidebarChat';
 import axios from '../axios';
 import { useSelector } from 'react-redux';
@@ -18,138 +18,133 @@ import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      textAlign: 'center'
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center'
     },
     paper: {
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
     },
-  }));
+}));
 
-  
+
 const ConversationManager = (props) => {
     const userReducerData = useSelector(state => state.userReducer);
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [isloading, setLoading] = React.useState(true);
-     const [value , setvalue]=React.useState("");
-     const handleClose = () => {
+    const [value, setvalue] = React.useState("");
+    const handleClose = () => {
         setOpen(false);
-      };
-      const inputsHandler = (e) =>{
-        setvalue( e.target.value )
+    };
+    const inputsHandler = (e) => {
+        setvalue(e.target.value)
     }
-    
+
     const handleNewChat = () => {
         console.log("New chat");
 
-        let body={
-            _id:value
-        }
-        
-        axios.post('/finduser', body)
-        .then(response => {
-
-
-            if(response.data.username!=null && value!="")
-            {
         let body = {
-            sender: {
-                "id": userReducerData._id,
-                "name": userReducerData.name
-            },
-            receiver: {
-                "id": value,
-                "name": response.data.username
-            }
+            _id: value
         }
 
-        axios.post('/conversation/new', body)
+        axios.post('/finduser', body)
             .then(response => {
-                console.log(response);
-            })
-        }
-        else 
-        alert("User does not exist")
-        })
 
-        .catch(error =>
-            {
+
+                if (response.data.username != null && value != "") {
+                    let body = {
+                        sender: {
+                            "id": userReducerData._id,
+                            "name": userReducerData.name
+                        },
+                        receiver: {
+                            "id": value,
+                            "name": response.data.username
+                        }
+                    }
+
+                    axios.post('/conversation/new', body)
+                        .then(response => {
+                            console.log(response);
+                        })
+                }
+                else
+                    alert("User does not exist")
+            })
+
+            .catch(error => {
                 console.log(error)
             }
             )
-
-        
-
     }
 
 
-    const  NewChat=()=>{
-    setOpen(true)      
+    const NewChat = () => {
+        setOpen(true)
     }
-   
-    
+
+
     const [conversation, setConversation] = useState([]);
     const [conversationData, setConversationData] = useState([]);
 
     useEffect(() => {
 
-        axios.post('/user/conversations', {_id: userReducerData._id})
-        .then(response => {
-            console.log("constructor");
-            setConversationData(response.data);
-            participantsFormatter(response.data);
+        axios.post('/user/conversations', { _id: userReducerData._id })
+            .then(response => {
+                console.log("constructor");
+                setConversationData(response.data);
+                participantsFormatter(response.data);
 
-        });
+            });
 
     }, [])
 
     useEffect(() => {
         const pusher = new Pusher('ea11adf214ecc46819d7', {
             cluster: 'mt1',
-            });
-    
-            const channel = pusher.subscribe('conversations');
-            channel.bind('inserted', function(newConversation) {
+        });
+
+        const channel = pusher.subscribe('conversations');
+        channel.bind('inserted', function (newConversation) {
             alert(JSON.stringify(newConversation));
-            
-            for(const i of newConversation.participants) {
-                if(i.id == userReducerData._id) {
+
+            for (const i of newConversation.participants) {
+                if (i.id == userReducerData._id) {
                     participantsFormatter([...conversationData, newConversation]);
                     break;
                 }
             }
 
             // setConversation([...conversation, newConversation]);
-            });
-    
-            return () => {
+        });
+
+        return () => {
             channel.unbind_all();
             channel.unsubscribe();
-            }
-    
-        }, [conversation]);
+        }
+
+    }, [conversation]);
 
     function participantsFormatter(response) {
         let participantsArray = [];
 
-            console.log(response)
-            
-            response.map((participants, index1) => {
-                participants.participants.map((participant, index2) => {
-                    if(participant.id != userReducerData._id)
-                        participantsArray.push({participant, "conversationId": participants["conversationId"]})
-                })
+        console.log(response)
+
+        response.map((participants, index1) => {
+            participants.participants.map((participant, index2) => {
+                if (participant.id != userReducerData._id)
+                    participantsArray.push({ participant, "conversationId": participants["conversationId"] })
             })
+        })
 
-            console.log(participantsArray)
+        console.log(participantsArray)
 
-            setConversation(participantsArray.reverse());
+        setConversation(participantsArray.reverse());
     }
 
     return (
@@ -175,54 +170,54 @@ const ConversationManager = (props) => {
 
             <div className="new_chat">
                 <IconButton onClick={NewChat}>
-                    <CreateIcon />
+                    <AddIcon />
                 </IconButton>
             </div>
             <div>
-            <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modal}
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Fade in={open}>
-          <div className={classes.paper}>
-          <Typography variant="h5" align="center" color="textSecondary"   style={{ marginTop: 20 }} noWrap>
-         Add New User 
-            </Typography>
-            <br/>
-          <TextField
-          id="outlined-number"
-          label="User Address"
-          type="text"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-          onChange={inputsHandler} 
-        />
-        <br/>
-          <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ marginTop: 20 }}
-                    onClick={() => {
-                        handleNewChat()
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
                     }}
-                  >
-                  Add  User
-                  </Button>
+                >
+                    <Fade in={open}>
+                        <div className={classes.paper}>
+                            <Typography variant="h5" align="center" color="textSecondary" style={{ marginTop: 20 }} noWrap>
+                                Add New User
+                            </Typography>
+                            <br />
+                            <TextField
+                                id="outlined-number"
+                                label="User Address"
+                                type="text"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                variant="outlined"
+                                onChange={inputsHandler}
+                            />
+                            <br />
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                style={{ marginTop: 20 }}
+                                onClick={() => {
+                                    handleNewChat()
+                                }}
+                            >
+                                Add  User
+                            </Button>
 
-        </div>
-        </Fade>
-        </Modal>
-        </div>
+                        </div>
+                    </Fade>
+                </Modal>
+            </div>
         </div>
     );
 }

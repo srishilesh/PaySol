@@ -7,10 +7,12 @@ import TextField from '@material-ui/core/TextField';
 import Typography from "@material-ui/core/Typography";
 import * as bs from "bs58";
 import * as solanaWeb3 from '@solana/web3.js';
-import { generateMnemonicAndSeed, getAddressFromSeed, mnemonicToSeed, Transaction, getAccountInfo } from "../../utils/wallet";
+import { Transaction, getAccountInfo } from "../../utils/wallet";
 import { Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+import "../Chatscreen/ConversationScreen/conversationScreen"
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -76,9 +78,11 @@ export default function Sendtransaction() {
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleOpen}>
-        pay
-      </Button>
+      <div class="chat_footer">
+        <Button variant="contained" color="primary" onClick={handleOpen}>
+          pay
+        </Button>
+      </div>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

@@ -103,6 +103,7 @@
 .chat_footer > button {
     padding: 2px;
     border-radius: 30px;
+    margin: 1.5px;
 }
 
 .new_chat {

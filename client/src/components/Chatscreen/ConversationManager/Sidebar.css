@@ -1,12 +1,13 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-    flex: 0.2;
+    flex: 0.5;
+    /* width: 100px; */
 }
 
 .sidebar_header {
     display: flex;
-    padding: 20px;
+    padding: 20px 10px 10px 20px;
     border-right: 1px solid lightgray;
     font-size: larger;
     font-weight: bold;

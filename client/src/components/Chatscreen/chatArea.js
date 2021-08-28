@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Pusher from 'pusher-js';
 import axios from './axios';
-import ConversationManager from './conversationManager';
-import ConversationScreen from './conversationScreen';
+import ConversationManager from './ConversationManager/conversationManager';
+import ConversationScreen from './ConversationScreen/conversationScreen';
 import TransactionArea from '../TransactionScreen/transactionArea'
 import { useSelector } from 'react-redux';
 import './chatArea.css';

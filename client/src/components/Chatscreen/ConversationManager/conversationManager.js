@@ -5,7 +5,7 @@ import { Avatar, IconButton } from '@material-ui/core';
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import CreateIcon from '@material-ui/icons/Create';
 import SidebarChat from './SidebarChat';
-import axios from './axios';
+import axios from '../axios';
 import { useSelector } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';

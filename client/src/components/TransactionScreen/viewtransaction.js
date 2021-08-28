@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as solanaWeb3 from "@solana/web3.js";
 import * as bs from "bs58";
-import '../../components/Chatscreen/conversationScreen.css'
+import '../../components/Chatscreen/ConversationScreen/conversationScreen.css'
 
 class viewtransaction extends Component {
   constructor(props) {

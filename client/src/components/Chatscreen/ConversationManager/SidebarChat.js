@@ -2,7 +2,7 @@ import { Avatar } from "@material-ui/core"
 import React from 'react';
 import { useDispatch } from "react-redux";
 import "./SidebarChat.css";
-import {SET_CONVERSATION_ID} from '../../constants/actionTypes';
+import {SET_CONVERSATION_ID} from '../../../constants/actionTypes';
 
 
 function SidebarChat(props) {

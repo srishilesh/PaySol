@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import axios from './axios';
+import axios from '../axios';
 import { Avatar, IconButton } from '@material-ui/core';
 import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
 
-
 import './conversationScreen.css';
-import Send from '../TransactionScreen/sendtransaction'
+import Send from '../../TransactionScreen/sendtransaction'
 
 const ConversationScreen = ({ messages }) => {
 

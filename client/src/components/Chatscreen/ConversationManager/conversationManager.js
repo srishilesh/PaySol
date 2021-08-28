@@ -41,6 +41,7 @@ const ConversationManager = (props) => {
     const [open, setOpen] = React.useState(false);
     const [isloading, setLoading] = React.useState(true);
     const [value, setvalue] = React.useState("");
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -79,11 +80,12 @@ const ConversationManager = (props) => {
                 else
                     alert("User does not exist")
             })
-
             .catch(error => {
                 console.log(error)
             }
             )
+
+            handleClose();
     }
 
 
@@ -114,7 +116,7 @@ const ConversationManager = (props) => {
 
         const channel = pusher.subscribe('conversations');
         channel.bind('inserted', function (newConversation) {
-            alert(JSON.stringify(newConversation));
+            // alert(JSON.stringify(newConversation));
 
             for (const i of newConversation.participants) {
                 if (i.id == userReducerData._id) {

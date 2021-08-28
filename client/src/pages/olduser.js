@@ -21,32 +21,32 @@ import Grid from "@material-ui/core/Grid";
 import axios from '../components/Chatscreen/axios';
 
 const styles = (theme) => ({
-    root: {
-      display: "flex",
+  root: {
+    display: "flex",
+  },
+  layout: {
+    width: "auto",
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+      width: 600,
+      marginLeft: "auto",
+      marginRight: "auto",
     },
-    layout: {
-      width: "auto",
-      marginLeft: theme.spacing(2),
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-        width: 600,
-        marginLeft: "auto",
-        marginRight: "auto",
-      },
+  },
+  paper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
     },
-    paper: {
-      marginTop: theme.spacing(3),
-      marginBottom: theme.spacing(3),
-      padding: theme.spacing(2),
-      [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-        marginTop: theme.spacing(6),
-        marginBottom: theme.spacing(6),
-        padding: theme.spacing(3),
-      },
-      justifyContent: "center",
-      alignItems: "center",
-    },
-  });
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 class olduser extends Component {
   constructor(props) {
@@ -75,24 +75,23 @@ class olduser extends Component {
     console.log(this.state.publicaddress);
     const info = await getAccountInfo(address.publicKey);
     localStorage.setItem("secretkey", bs.encode(this.state.privateaddress));
-   
-    let body={
-      _id:this.state.publicaddress
+
+    let body = {
+      _id: this.state.publicaddress
     }
     axios.post('/finduser', body)
-    .then(response => {
-    if(response.data.password==this.state.password)
-    {
-    localStorage.setItem("secretkey", bs.encode(this.state.privateaddress));
-    localStorage.setItem("name", response.data.username);
-    localStorage.setItem("password", response.data.password);
-    this.props.history.push("/chat");
-    }
-    else
-    alert("Incorrect password")
-    });
+      .then(response => {
+        if (response.data.password == this.state.password) {
+          localStorage.setItem("secretkey", bs.encode(this.state.privateaddress));
+          localStorage.setItem("name", response.data.username);
+          localStorage.setItem("password", response.data.password);
+          this.props.history.push("/chat");
+        }
+        else
+          alert("Incorrect password")
+      });
 
-  
+
   };
 
   render() {

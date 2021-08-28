@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import * as solanaWeb3 from "@solana/web3.js";
 import * as bs from "bs58";
-import '../components/Chatscreen/conversationScreen.css'
+import '../../components/Chatscreen/conversationScreen.css'
+
 class viewtransaction extends Component {
   constructor(props) {
     super(props);
@@ -33,22 +34,20 @@ class viewtransaction extends Component {
   }
 
   render() {
-   
+
     if (this.state.loading) return <p>loading</p>;
     else
       return (
         <div className="chat_body1">
-          {this.state.transaction.map((transaction) =>
+          {this.state.transaction.map((transaction) => {
+            if (transaction.transaction.message.accountKeys[0].toString() == this.state.publickey) {
+              console.log(transaction);
+              return <p>{transaction.transaction.message.accountKeys[1].toString()}  - {(transaction.meta.preBalances[0] - transaction.meta.postBalances[0]) / 1000000000} </p>
+            } else {
+              return <p>{transaction.transaction.message.accountKeys[0].toString()} + {(transaction.meta.postBalances[1] - transaction.meta.preBalances[1]) / 1000000000}</p>
+            }
+          }
 
-{
-    if(transaction.transaction.message.accountKeys[0].toString() == this.state.publickey){
-        console.log(transaction);
-      return  <p>{transaction.transaction.message.accountKeys[1].toString()}  - {(transaction.meta.preBalances[0]-transaction.meta.postBalances[0])/1000000000} </p>
-    } else{
-      return  <p>{transaction.transaction.message.accountKeys[0].toString()} + {(transaction.meta.postBalances[1]-transaction.meta.preBalances[1])/1000000000}</p>
-    }
-  }
-           
           )}
         </div>
       );

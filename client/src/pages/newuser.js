@@ -92,19 +92,19 @@ class newuser extends Component {
     localStorage.setItem("name", this.state.name);
     localStorage.setItem("password", this.state.password);
     let body = {
-     _id:this.state.publicaddress,
-     username:this.state.name,
-     password:this.state.password,
-     conversationId:[]
+      _id: this.state.publicaddress,
+      username: this.state.name,
+      password: this.state.password,
+      conversationId: []
     };
     console.log(body);
 
     axios.post('/user/new', body)
-    .then(response => {
-    // console.log(response.data)
-    this.props.history.push("/chat");
-    });
-    
+      .then(response => {
+        // console.log(response.data)
+        this.props.history.push("/chat");
+      });
+
   };
 
   handleChange = (event) => {

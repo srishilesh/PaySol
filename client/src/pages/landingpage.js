@@ -3,9 +3,7 @@ import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import * as solanaWeb3 from "@solana/web3.js";
 import * as bs from "bs58";
 import Home from "./home";
-import Intro from "../components/intro";
-
-
+import Intro from "../components/Login/intro";
 
 class landingpage extends Component {
   constructor(props) {
@@ -15,11 +13,6 @@ class landingpage extends Component {
       pk: null,
     };
   }
-
-  
-  
-
- 
 
   componentDidMount() {
     if (localStorage.getItem("secretkey") != null) {
@@ -35,14 +28,14 @@ class landingpage extends Component {
   render() {
     return (
       <div>
-       
+
 
 
 
 
         {!this.state.ispublickey ? (
           <div
-           >
+          >
             {/* <button>
               <Link to="/newuser"> Generate New key</Link>
             </button>
@@ -50,7 +43,7 @@ class landingpage extends Component {
             <button>
               <Link to="/olduser"> Access Existing Key</Link>
             </button> */}
-            <Intro/>
+            <Intro />
           </div>
         ) : (
           <div>

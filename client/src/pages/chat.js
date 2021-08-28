@@ -24,7 +24,7 @@ import Chatscreen from '../components/Chatscreen';
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
-import {SET_USER} from '../constants/actionTypes';
+import { SET_USER } from '../constants/actionTypes';
 
 
 const drawerWidth = 240;
@@ -93,34 +93,34 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Chat = (props) => {
-  
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [isloading , setLoading]=React.useState(false)
+  const [isloading, setLoading] = React.useState(false)
   const dispatch = useDispatch();
 
   useEffect(() => {
-  
-  if (localStorage.getItem("secretkey") != null) {
-  
-  var pk = new solanaWeb3.Account(
-    bs.decode(localStorage.getItem("secretkey"))
-  );
-  console.log(localStorage.getItem("secretkey"));
-  let detail={
-   _id:pk.publicKey.toString(),
-   name:localStorage.getItem("name"),
-   pk:pk.publicKey
-  }
-  console.log(detail)
-  dispatch({type: SET_USER, payload: detail});
-  setLoading(true)
-  }
-  else{
-  props.history.push("/");
-  }
-  
+
+    if (localStorage.getItem("secretkey") != null) {
+
+      var pk = new solanaWeb3.Account(
+        bs.decode(localStorage.getItem("secretkey"))
+      );
+      console.log(localStorage.getItem("secretkey"));
+      let detail = {
+        _id: pk.publicKey.toString(),
+        name: localStorage.getItem("name"),
+        pk: pk.publicKey
+      }
+      console.log(detail)
+      dispatch({ type: SET_USER, payload: detail });
+      setLoading(true)
+    }
+    else {
+      props.history.push("/");
+    }
+
   }, [])
 
   const handleDrawerOpen = () => {
@@ -132,72 +132,72 @@ const Chat = (props) => {
   };
 
 
- 
-  if(isloading)
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            PaySol
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
+
+  if (isloading)
+    return (
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, {
+                [classes.hide]: open,
+              })}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              PaySol
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {['Chat'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon><ChatBubbleIcon /></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <main className={classes.content}>
-        {/* <div className={classes.toolbar} /> */}
-        <Chatscreen />
-      </main>
-    </div>
-  );
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+            }),
+          }}
+        >
+          <div className={classes.toolbar}>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            </IconButton>
+          </div>
+          <Divider />
+          <List>
+            {['Chat'].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon><ChatBubbleIcon /></ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+        <main className={classes.content}>
+          {/* <div className={classes.toolbar} /> */}
+          <Chatscreen />
+        </main>
+      </div>
+    );
   else
-  return(<div className={classes.root}><CircularProgress /></div>)
+    return (<div className={classes.root}><CircularProgress /></div>)
 
-  
+
 }
 
 export default Chat;

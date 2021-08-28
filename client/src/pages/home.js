@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import { getAccountInfo } from "../utils/wallet";
-import Transaction from '../components/transaction';
-import Viewtransaction from '../components/viewtransaction';
-import Accountinfo from '../components/accountinfo';
+import Transaction from '../components/TransactionScreen/transaction';
+import Viewtransaction from '../components/TransactionScreen/viewtransaction';
 
 class home extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            pk:props.title
+        this.state = {
+            pk: props.title
         }
     }
 
     render() {
         return (
             <div>
-            {/* <Accountinfo title={this.state.pk}/> */}
-            <Transaction/>
-            <Viewtransaction/>
+                {/* <Accountinfo title={this.state.pk}/> */}
+                <Transaction />
+                <Viewtransaction />
             </div>
         );
     }

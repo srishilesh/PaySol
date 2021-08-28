@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { getAccountInfo } from "../utils/wallet";
+import { getAccountInfo } from "../../utils/wallet";
 
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
 import QRCode from "qrcode.react";
 
 const styles = (theme) => ({
@@ -57,21 +54,21 @@ class accountinfo extends Component {
 
         <main className={classes.layout}>
           <Paper className={classes.paper}>
-          <QRCode
-        id="qr-gen"
-        value={this.state.pk.toString()}
-        size={150}
-        level={"H"}
-        includeMargin={true}
-      />
-          <Typography component="h1" variant="h4" align="center">
-           {this.props.name}
-          </Typography>
-          <Typography variant="body2" align="center" color="textSecondary" noWrap>
-          {this.state.pk.toString()}
+            <QRCode
+              id="qr-gen"
+              value={this.state.pk.toString()}
+              size={150}
+              level={"H"}
+              includeMargin={true}
+            />
+            <Typography component="h1" variant="h4" align="center">
+              {this.props.name}
+            </Typography>
+            <Typography variant="body2" align="center" color="textSecondary" noWrap>
+              {this.state.pk.toString()}
             </Typography>
             <Typography variant="h4" align="center" paragraph>
-            {this.state.info/1000000000} SOL
+              {this.state.info / 1000000000} SOL
             </Typography>
           </Paper>
         </main>

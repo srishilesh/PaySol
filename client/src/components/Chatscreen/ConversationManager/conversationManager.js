@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './Sidebar.css';
 import Pusher from 'pusher-js';
 import { Avatar, IconButton } from '@material-ui/core';
@@ -14,6 +15,7 @@ import Fade from '@material-ui/core/Fade';
 import Typography from "@material-ui/core/Typography";
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
+import { SET_CONVERSATIONS } from '../../../constants/actionTypes';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ConversationManager = (props) => {
     const userReducerData = useSelector(state => state.userReducer);
+    const dispatch = useDispatch();
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [isloading, setLoading] = React.useState(true);
@@ -145,6 +148,7 @@ const ConversationManager = (props) => {
         console.log(participantsArray)
 
         setConversation(participantsArray.reverse());
+        dispatch({type: SET_CONVERSATIONS, payload: participantsArray})
     }
 
     return (

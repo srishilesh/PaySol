@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from "@material-ui/core/Typography";
 import * as bs from "bs58";
 import * as solanaWeb3 from '@solana/web3.js';
+import axios from './axios';
 import { Transaction, getAccountInfo } from "../../utils/wallet";
 import { Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
@@ -68,12 +69,27 @@ export default function Sendtransaction() {
       setLoading(false)
       var status = await Transaction(from, to, amount, bs.decode(localStorage.getItem('secretkey')))
       setNotification(1);
-      console.log(status)
+      console.log(status);
+      axios.post('/messages/new', {
+        "message": "Success",
+        "sender_id": userReducerData._id,
+        "timestamp": new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }),
+        "conversationId": selectedConversationIdData.conversation_id,
+        "amount": amount
+    });
       setOpen(false);
-    }
-    else
+    } else {
       setNotification(2);
-  };
+      axios.post('/messages/new', {
+        "message": "failure",
+        "sender_id": userReducerData._id,
+        "timestamp": new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }),
+        "conversationId": selectedConversationIdData.conversation_id,
+        "amount": amount
+
+    });
+  }
+}
 
   return (
     <div>

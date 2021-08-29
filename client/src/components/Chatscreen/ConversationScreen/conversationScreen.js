@@ -14,6 +14,7 @@ const ConversationScreen = ({ messages }) => {
     const userReducerData = useSelector(state => state.userReducer);
     const disabled = (selectedConversationIdData.toaddress === "");
     const conversationsData = useSelector(state => state.conversationsReducer);
+    console.log(conversationsData);
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -22,8 +23,7 @@ const ConversationScreen = ({ messages }) => {
             "message": input,
             "sender_id": userReducerData._id,
             "timestamp": new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }),
-            "conversationId": selectedConversationIdData.conversation_id,
-            // "amount": 1
+            "conversationId": selectedConversationIdData.conversation_id
         });
 
         setInput("");
@@ -43,7 +43,9 @@ const ConversationScreen = ({ messages }) => {
             <div className="chat_body">
                 {messages.map((message, key) => (
                     <p key={key} className={`chat_message ${(message.sender_id == userReducerData._id) && "chat_reciever"}`}>
-                        <span className="chat_name">{conversationsData.conversations[0].participant.name}</span>
+                        <span className="chat_name">{(message.sender_id == userReducerData._id) && userReducerData.name}</span>
+                        <span className="chat_name">{(message.sender_id != userReducerData._id) && selectedConversationIdData.name}</span>
+                        {(message.amount) && <h2>{message.amount}</h2>}
                         {message.message}
                         <span className="chat_timestamp">
                             {message.timestamp}

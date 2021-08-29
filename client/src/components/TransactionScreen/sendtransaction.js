@@ -81,7 +81,7 @@ export default function Sendtransaction() {
     } else {
       setNotification(2);
       axios.post('/messages/new', {
-        "message": "failure",
+        "message": "Failure",
         "sender_id": userReducerData._id,
         "timestamp": new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }),
         "conversationId": selectedConversationIdData.conversation_id,

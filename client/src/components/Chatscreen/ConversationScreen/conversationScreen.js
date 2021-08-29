@@ -14,7 +14,6 @@ const ConversationScreen = ({ messages }) => {
     const userReducerData = useSelector(state => state.userReducer);
     const disabled = (selectedConversationIdData.toaddress === "");
     const conversationsData = useSelector(state => state.conversationsReducer);
-    console.log(conversationsData);
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -44,7 +43,7 @@ const ConversationScreen = ({ messages }) => {
             <div className="chat_body">
                 {messages.map((message, key) => (
                     <p key={key} className={`chat_message ${(message.sender_id == userReducerData._id) && "chat_reciever"}`}>
-                        <span className="chat_name">true</span>
+                        <span className="chat_name">{conversationsData.conversations[0].participant.name}</span>
                         {message.message}
                         <span className="chat_timestamp">
                             {message.timestamp}

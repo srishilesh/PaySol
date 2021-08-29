@@ -7,7 +7,6 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
-    console.log(action.payload)
     switch(action.type) {
         case SET_USER:
             state.name=action.payload.name

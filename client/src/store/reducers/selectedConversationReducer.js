@@ -14,8 +14,7 @@ const selectedConversationReducer = (state = initialState, action) => {
             state.name=action.payload.name
             return state;
         case CLEAR_CONVERSATION_ID:
-            state.conversation_id = -1;
-            return state;
+            return initialState;
         default:
             return initialState;
     }

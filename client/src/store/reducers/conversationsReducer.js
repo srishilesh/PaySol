@@ -1,15 +1,16 @@
 import {SET_CONVERSATIONS, CLEAR_CONVERSATIONS} from '../../constants/actionTypes';
 
-const initialState = {};
+const initialState = {
+    conversations: [],
+};
 
 const conversationsReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_CONVERSATIONS:
-            state = action.payload;
+            state.conversations = action.payload;
             return state;
         case CLEAR_CONVERSATIONS:
-            state = {};
-            return state;
+            return initialState;
         default:
             return initialState;
     }

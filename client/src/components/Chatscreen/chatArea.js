@@ -13,7 +13,7 @@ const Chatscreen = () => {
     const selectedConversationIdData = useSelector(state => state.selectedConversationReducer)
 
     const [messages, setMessages] = useState([]);
-    const [scrollBar, setScrollBar] = useState(null);
+    const [scrollBar, setScrollBar] = useState(0);
 
     console.log(userReducerData)
 
@@ -37,6 +37,7 @@ const Chatscreen = () => {
         axios.post('/messages/sync', body)
         .then(response => {
         setMessages(response.data);
+        setScrollBar(prev => prev + 1);
         });
     }
 

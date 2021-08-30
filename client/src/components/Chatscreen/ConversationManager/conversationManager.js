@@ -59,7 +59,6 @@ const ConversationManager = (props) => {
         axios.post('/finduser', body)
             .then(response => {
 
-
                 if (response.data.username != null && value != "") {
                     let body = {
                         sender: {

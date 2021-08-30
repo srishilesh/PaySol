@@ -17,8 +17,7 @@ const ConversationScreen = ({ messages,  scrollBar}) => {
     console.log(conversationsData);
 
     
-    useEffect(() => {
-        
+    useEffect(() => {        
         document.querySelector(".chat_body").scrollTo(0, document.querySelector(".chat_body").scrollHeight);
       }, [scrollBar]);
 

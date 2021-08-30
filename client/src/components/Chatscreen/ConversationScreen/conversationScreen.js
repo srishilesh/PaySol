@@ -21,7 +21,6 @@ const ConversationScreen = ({ messages }) => {
         var chatHistory = document.getElementsByClassName("chat_body");
         chatHistory.scrollTop = chatHistory.scrollHeight;
     }
-    document.querySelector(".chat_body").scrollTo(0, document.querySelector(".chat_body").scrollHeight);
 
     const sendMessage = (e) => {
         e.preventDefault();

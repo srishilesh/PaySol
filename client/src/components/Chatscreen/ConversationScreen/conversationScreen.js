@@ -16,15 +16,23 @@ const ConversationScreen = ({ messages }) => {
     const conversationsData = useSelector(state => state.conversationsReducer);
     console.log(conversationsData);
 
+    
+    const scrollToEnd = () => {
+        var chatHistory = document.getElementsByClassName("chat_body");
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+    document.querySelector(".chat_body").scrollTo(0, document.querySelector(".chat_body").scrollHeight);
+
     const sendMessage = (e) => {
         e.preventDefault();
-
+        
         axios.post('/messages/new', {
             "message": input,
             "sender_id": userReducerData._id,
             "timestamp": new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }),
             "conversationId": selectedConversationIdData.conversation_id
         });
+        document.querySelector(".chat_body").scrollTo(0, document.querySelector(".chat_body").scrollHeight);
 
         setInput("");
     };

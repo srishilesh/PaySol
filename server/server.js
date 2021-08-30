@@ -55,7 +55,8 @@ db.once('open', () => {
                 sender_id: messageDetails.sender_id,
                 message: messageDetails.message,
                 conversationId: messageDetails.conversationId,
-                timestamp: messageDetails.timestamp
+                timestamp: messageDetails.timestamp,
+                amount: messageDetails.amount
             });
         } else {
             console.log("Error triggering Pusher");

@@ -77,9 +77,10 @@ export default function Sendtransaction(props) {
         "conversationId": selectedConversationIdData.conversation_id,
         "amount": amount
     });
+    props.changeFunction()
     setLoading(true)
       setOpen(false);
-      props.changeFunction()
+     
     } else {
       setNotification(2);
       axios.post('/messages/new', {

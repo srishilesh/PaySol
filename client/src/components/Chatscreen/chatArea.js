@@ -48,16 +48,17 @@ const Chatscreen = () => {
     }
 
     useEffect(() => {
-        changeFunction()
+        
     const pusher = new Pusher('ea11adf214ecc46819d7', {
         cluster: 'mt1',
         });
-
+      
         const channel = pusher.subscribe('messages');
         channel.bind('inserted', function(newMessage) {
         // alert(JSON.stringify(newMessage));
         setMessages([...messages, newMessage]);
         setScrollBar(prev => prev + 1);
+        
         });
 
         return () => {

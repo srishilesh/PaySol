@@ -33,6 +33,8 @@ class viewtransaction extends Component {
 
  async allTransaction()
  {
+   var empty=[]
+   this.setState({transaction:empty})
   var con = new solanaWeb3.Connection("https://api.devnet.solana.com/");
   var pk = new solanaWeb3.Account(
     bs.decode(localStorage.getItem("secretkey"))
@@ -40,14 +42,22 @@ class viewtransaction extends Component {
   console.log(pk);
   this.setState({ publickey: pk.publicKey.toString() });
   var sign = await con.getSignaturesForAddress(pk.publicKey);
+  console.log(sign[0])
   sign.map(async (sign) => {
     var trans = await con.getTransaction(sign.signature);
-    console.log(trans.blockTime);
+   
+   
     this.setState({
-      transaction: this.state.transaction.concat(trans),
-    });
+      transaction: [...this.state.transaction, trans]
+    })
    
   });
+  // var trans = await con.getTransaction(sign[0].signature);
+  // console.log(trans.blockTime);
+  // this.setState({
+  //   transaction: this.state.transaction.concat(trans),
+  // });
+
   //  var trans = await con.getTransaction(sign)
   //  console.log(trans.transaction.message.accountKeys)
  this.state.transaction.sort((a, b) => b.blockTime - a.blockTime);

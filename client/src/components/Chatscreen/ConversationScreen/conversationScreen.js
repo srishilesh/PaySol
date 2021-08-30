@@ -7,7 +7,8 @@ import TelegramIcon from '@material-ui/icons/Telegram';
 import './conversationScreen.css';
 import Send from '../../TransactionScreen/sendtransaction'
 
-const ConversationScreen = ({ messages,  scrollBar}) => {
+const ConversationScreen = ({ messages,  scrollBar,changeFunction}) => {
+
 
     const [input, setInput] = useState("");
     const selectedConversationIdData = useSelector(state => state.selectedConversationReducer)
@@ -20,6 +21,12 @@ const ConversationScreen = ({ messages,  scrollBar}) => {
     useEffect(() => {        
         document.querySelector(".chat_body").scrollTo(0, document.querySelector(".chat_body").scrollHeight);
       }, [scrollBar]);
+
+    const scrollToEnd = () => {
+        var chatHistory = document.getElementsByClassName("chat_body");
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -76,7 +83,7 @@ const ConversationScreen = ({ messages,  scrollBar}) => {
                 <Button variant="contained" color="primary" onClick={sendMessage} disabled={disabled}>
                     <TelegramIcon />
                 </Button>
-                {disabled ? null : <Send />}
+                {disabled ? null : <Send changeFunction={changeFunction} />}
             </div>
         </div>
     );

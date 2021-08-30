@@ -14,6 +14,7 @@ const Chatscreen = () => {
 
     const [messages, setMessages] = useState([]);
     const [scrollBar, setScrollBar] = useState(0);
+    const [change, setChange] = useState(false);
 
     console.log(userReducerData)
 
@@ -41,7 +42,13 @@ const Chatscreen = () => {
         });
     }
 
+    function changeFunction() {
+        setChange(!change)
+     
+    }
+
     useEffect(() => {
+        changeFunction()
     const pusher = new Pusher('ea11adf214ecc46819d7', {
         cluster: 'mt1',
         });
@@ -64,8 +71,8 @@ const Chatscreen = () => {
         <div className="app">
             <div className="app_body" >
                 <ConversationManager syncFunction={syncFunction} />
-                <ConversationScreen messages={messages} scrollBar={scrollBar} />
-                <TransactionArea />
+                <ConversationScreen messages={messages} changeFunction={changeFunction} scrollBar={scrollBar} />
+                <TransactionArea ischange={change} />
             </div>
         </div>
     );

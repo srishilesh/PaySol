@@ -46,6 +46,16 @@ class accountinfo extends Component {
     this.setState({ info: info });
   }
 
+  async componentDidUpdate(prevProps) {
+    if(this.props.ischange!=prevProps.ischange) // Check if it's a new user, you can also use some unique property, like the ID  (this.props.user.id !== prevProps.user.id)
+    {
+      const info = await getAccountInfo(this.state.pk);
+      this.setState({ info: info });
+    }
+  } 
+  
+
+
   render() {
     const { classes } = this.props;
     return (

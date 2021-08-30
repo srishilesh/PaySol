@@ -31,25 +31,43 @@ class viewtransaction extends Component {
   }
 
 
-  async componentDidMount() {
-    var con = new solanaWeb3.Connection("https://api.devnet.solana.com/");
-    var pk = new solanaWeb3.Account(
-      bs.decode(localStorage.getItem("secretkey"))
-    );
-    console.log(pk);
-    this.setState({ publickey: pk.publicKey.toString() });
-    var sign = await con.getSignaturesForAddress(pk.publicKey);
-    sign.map(async (sign) => {
-      var trans = await con.getTransaction(sign.signature);
-      console.log(trans);
-      this.setState({
-        transaction: this.state.transaction.concat(trans),
-      });
+ async allTransaction()
+ {
+  var con = new solanaWeb3.Connection("https://api.devnet.solana.com/");
+  var pk = new solanaWeb3.Account(
+    bs.decode(localStorage.getItem("secretkey"))
+  );
+  console.log(pk);
+  this.setState({ publickey: pk.publicKey.toString() });
+  var sign = await con.getSignaturesForAddress(pk.publicKey);
+  sign.map(async (sign) => {
+    var trans = await con.getTransaction(sign.signature);
+    console.log(trans.blockTime);
+    this.setState({
+      transaction: this.state.transaction.concat(trans),
     });
-    //  var trans = await con.getTransaction(sign)
-    //  console.log(trans.transaction.message.accountKeys)
-    this.setState({ loading: false });
+   
+  });
+  //  var trans = await con.getTransaction(sign)
+  //  console.log(trans.transaction.message.accountKeys)
+ this.state.transaction.sort((a, b) => b.blockTime - a.blockTime);
+ console.log(this.state.transaction)
+  this.setState({ loading: false });
+}
+
+  async componentDidMount() {
+    this.allTransaction()
+   
   }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.ischange!=prevProps.ischange) // Check if it's a new user, you can also use some unique property, like the ID  (this.props.user.id !== prevProps.user.id)
+    {
+      console.log("hello")
+      this.allTransaction()
+    }
+  } 
+  
 
   render() {
 

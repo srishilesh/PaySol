@@ -1,16 +1,19 @@
-import React from 'react';
-import Accountinfo from './accountinfo';
-import { useSelector } from 'react-redux';
-import Viewtransaction from './viewtransaction';
+import React, { useState } from 'react';
+import Accountinfo from "./accountinfo";
+import { useSelector } from "react-redux";
+import Viewtransaction from "./viewtransaction";
 
-const TransactionArea = () => {
-    const userReducerData = useSelector(state => state.userReducer);
-    return (
-        <div>
-            <Accountinfo title={userReducerData.pk} name={userReducerData.name} />
-            <Viewtransaction />
-        </div>
-    );
-}
+const TransactionArea = (props) => {
+  const userReducerData = useSelector((state) => state.userReducer);
+  console.log(props.ischange)
+
+  return (
+    <div>
+      <Accountinfo title={userReducerData.pk} name={userReducerData.name} ischange={props.ischange} />
+      <Viewtransaction ischange={props.ischange}/>
+    </div>
+  );
+ 
+};
 
 export default TransactionArea;

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sendtransaction() {
+export default function Sendtransaction(props) {
   const userReducerData = useSelector(state => state.userReducer);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -77,7 +77,9 @@ export default function Sendtransaction() {
         "conversationId": selectedConversationIdData.conversation_id,
         "amount": amount
     });
+    setLoading(true)
       setOpen(false);
+      props.changeFunction()
     } else {
       setNotification(2);
       axios.post('/messages/new', {
@@ -130,6 +132,7 @@ export default function Sendtransaction() {
                     }}
                     variant="outlined"
                     onChange={inputsHandler}
+                    required
                   />
 
                   <br />

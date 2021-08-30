@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from '../axios';
 import { Avatar, Button } from '@material-ui/core';
@@ -7,7 +7,7 @@ import TelegramIcon from '@material-ui/icons/Telegram';
 import './conversationScreen.css';
 import Send from '../../TransactionScreen/sendtransaction'
 
-const ConversationScreen = ({ messages }) => {
+const ConversationScreen = ({ messages,  scrollBar}) => {
 
     const [input, setInput] = useState("");
     const selectedConversationIdData = useSelector(state => state.selectedConversationReducer)
@@ -17,10 +17,10 @@ const ConversationScreen = ({ messages }) => {
     console.log(conversationsData);
 
     
-    const scrollToEnd = () => {
-        var chatHistory = document.getElementsByClassName("chat_body");
-        chatHistory.scrollTop = chatHistory.scrollHeight;
-    }
+    useEffect(() => {
+        
+        document.querySelector(".chat_body").scrollTo(0, document.querySelector(".chat_body").scrollHeight);
+      }, [scrollBar]);
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -31,7 +31,6 @@ const ConversationScreen = ({ messages }) => {
             "timestamp": new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }),
             "conversationId": selectedConversationIdData.conversation_id
         });
-        document.querySelector(".chat_body").scrollTo(0, document.querySelector(".chat_body").scrollHeight);
 
         setInput("");
     };

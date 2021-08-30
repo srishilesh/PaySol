@@ -13,6 +13,7 @@ const Chatscreen = () => {
     const selectedConversationIdData = useSelector(state => state.selectedConversationReducer)
 
     const [messages, setMessages] = useState([]);
+    const [scrollBar, setScrollBar] = useState(null);
 
     console.log(userReducerData)
 
@@ -48,6 +49,7 @@ const Chatscreen = () => {
         channel.bind('inserted', function(newMessage) {
         // alert(JSON.stringify(newMessage));
         setMessages([...messages, newMessage]);
+        setScrollBar(prev => prev + 1);
         });
 
         return () => {
@@ -61,7 +63,7 @@ const Chatscreen = () => {
         <div className="app">
             <div className="app_body" >
                 <ConversationManager syncFunction={syncFunction} />
-                <ConversationScreen messages={messages} />
+                <ConversationScreen messages={messages} scrollBar={scrollBar} />
                 <TransactionArea />
             </div>
         </div>

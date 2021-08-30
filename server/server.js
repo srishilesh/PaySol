@@ -226,9 +226,10 @@ async function getParticipants(conversationId, res) {
         
     }
 
-    console.log(participants);
+    setTimeout(function(){ res.status(200).send(participants); }, 1000);
+    
 
-    res.status(200).send(participants)
+    
 }
 
 app.listen(port, () => console.log(`Listening on localhost: ${port}`));

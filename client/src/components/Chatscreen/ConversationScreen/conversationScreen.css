@@ -1,0 +1,112 @@
+.chat {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.chat_header {
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+}
+
+.chat_headerInfo {
+    flex: 1;
+    padding: 20px;
+}
+
+.chat_headerInfo > h3 {
+    margin-bottom: 3px;
+    font-weight: 500;
+}
+
+.chat_headerInfo > p {
+    color: gray;
+}
+
+.chat_body {
+    flex: 1;
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fi.imgur.com%2F1Rg03go.png&f=1&nofb=1');
+    background-repeat: repeat;
+    background-position: center;
+    padding: 30px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.chat_body1 {
+    width: 65vh
+    /* flex: 1; */
+    /* height:224px; */
+    /* background-image: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fi.imgur.com%2F1Rg03go.png&f=1&nofb=1');
+    background-repeat: repeat;
+    background-position: center;
+    padding: 30px;
+    overflow: scroll;
+    overflow-x: hidden; */
+}
+
+.chat_message {
+    position: relative;
+    font-size: 16px;
+    padding: 10px;
+    width: fit-content;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-bottom: 30px;
+}
+
+.chat_timestamp {
+    margin-left: 10px;
+    font-size: xx-small;
+}
+
+.chat_name {
+    position: absolute;
+    top: -15px;
+    font-weight: 800;
+    font-size: xx-small;
+}
+
+.chat_reciever {
+    margin-left: auto;
+    background-color: #dcf8c6;
+}
+
+.chat_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px;
+    border-top: 1px solid lightgray;
+}
+
+.chat_footer > form {
+    flex: 1;
+    display: flex;
+    padding-right: 10px;
+}
+
+.chat_footer > form > input {
+    flex: 1;
+    outline-width: 0;
+    border-radius: 30px;
+    padding: 10px;
+    border: none;
+}
+
+.chat_footer > form > button {
+    display: none;
+}
+
+.chat_footer > button {
+    padding: 2px;
+    border-radius: 30px;
+    margin: 1.5px;
+}
+
+.new_chat {
+    display: flex;
+    justify-content: end;
+}

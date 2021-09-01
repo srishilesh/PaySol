@@ -56,14 +56,16 @@ const Chatscreen = () => {
         const channel = pusher.subscribe('messages');
         channel.bind('inserted', function(newMessage) {
         // alert(JSON.stringify(newMessage));
-        setMessages([...messages, newMessage]);
-        setScrollBar(prev => prev + 1);
+        if(selectedConversationIdData.conversation_id == newMessage.conversation_id) {
+            setMessages([...messages, newMessage]);
+            setScrollBar(prev => prev + 1);
+        }
         
         });
 
         return () => {
-        channel.unbind_all();
-        channel.unsubscribe();
+            channel.unbind_all();
+            channel.unsubscribe();
         }
 
     }, [messages]);

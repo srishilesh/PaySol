@@ -78,7 +78,7 @@ class newuser extends Component {
     const url = window.URL.createObjectURL(new Blob([mnemonic]));
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", "sollet.bak");
+    link.setAttribute("download", "paysol.bak");
     document.body.appendChild(link);
     link.click();
     this.setState({ isdownladed: false });

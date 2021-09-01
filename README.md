@@ -52,6 +52,7 @@ npm run start
 - [ReactJS](https://github.com/facebook/react)
 - [NodeJS](https://github.com/nodejs)
 - [MongoDB](https://github.com/mongodb/mongo)
+- [Solana Web3js](https://solana-labs.github.io/solana-web3.js/modules.html)
 
 ## Roadmap
 - Multi-asset management

@@ -56,7 +56,8 @@ const Chatscreen = () => {
         const channel = pusher.subscribe('messages');
         channel.bind('inserted', function(newMessage) {
         // alert(JSON.stringify(newMessage));
-        if(selectedConversationIdData.conversation_id == newMessage.conversation_id) {
+        console.log(newMessage);
+        if(selectedConversationIdData.conversation_id == newMessage.conversationId) {
             setMessages([...messages, newMessage]);
             setScrollBar(prev => prev + 1);
         }

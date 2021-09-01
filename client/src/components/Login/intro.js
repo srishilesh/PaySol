@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
-    padding: theme.spacing(2),
+    padding: theme.spacing(10),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginTop: theme.spacing(6),
+      marginTop: theme.spacing(20),
       marginBottom: theme.spacing(6),
       padding: theme.spacing(3),
     },
@@ -44,9 +44,7 @@ function Intro() {
             PAYSOL
           </Typography>
           <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            Something short and leading about the collection below—its contents, the creator, etc.
-            Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-            entirely.
+          PAYSOL is a contactless, borderless and secure cryptocurrency payment technology designed on solana. Shop with crypto or send crypto to friends and family worldwide.
           </Typography>
           <div className={classes.heroButtons}>
             <Grid container spacing={2} justifyContent="center">

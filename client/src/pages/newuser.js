@@ -126,9 +126,8 @@ class newuser extends Component {
                   PAY SOL
                 </Typography>
                 <Typography variant="h6" align="center" paragraph>
-                  Something short and leading about the collection below—its
-                  contents, the creator, etc. Make it short and sweet, but not
-                  too short so folks don&apos;t simply skip over it entirely.
+                Pay and get paid with crypto <br/>
+                Download and keep the  key safe for future use
                 </Typography>
                 <TextField
                   id="outlined-multiline-static"

@@ -3,9 +3,18 @@
 
 ## Project Description
 
-A chat enabled cryptocurrency wallet for transacting SOL tokens.
+A chat enabled non-custodian cryptocurrency wallet for transacting SOL tokens.
+
+### Features
+- Web based non-custodial crypto wallet
+- Enables secure and private 1:1 messaging
+- Pay by scanning QR code
+- Creating accounts KYC-free
+- Zero transaction fee charged by PaySol
 
 ## Architecture
+
+![Architecture diagram](./resources/Architecture.jpg)
 
 ## Configuration
 
@@ -54,11 +63,16 @@ npm run start
 - [MongoDB](https://github.com/mongodb/mongo)
 - [Solana Web3js](https://solana-labs.github.io/solana-web3.js/modules.html)
 
-## Roadmap
+## Way forward
 - Multi-asset management
 - Build reward programs for the users
 - Build ERC-20 token to redeem the rewards
 - Enhancing the Chat UI
+- Advertising products/services in the marketplace
+- Subscription based billing and invoicing of payments
+- Analytics and reports generation
+- Building peer-to-peer system for messaging
+- Connecting with Serum DEX
 
 ## Authors
 - [Srishilesh P S](https://github.com/srishilesh)

@@ -18,7 +18,16 @@ A chat enabled non-custodian cryptocurrency wallet for transacting SOL tokens.
 
 ## Configuration
 
-Setting up MongoDB environment
+For running the Server, you need to create a `.env` file with the following fields:
+
+```env
+PUSHER_APPID = 
+PUSHER_KEY = 
+PUSHER_SECRET = 
+PUSHER_CLUSTER = 
+
+MONGO_CONNECTION_URL =
+```
 
 ## Installation
 
@@ -30,6 +39,12 @@ To run this application locally, clone the GitHub repo using `https://github.com
 
 ```bash
 cd server
+```
+
+- Install the packages:
+
+```bash
+npm install
 ```
 
 - To run the server:
@@ -51,6 +66,12 @@ nodemon server.js
 cd client
 ```
 
+- Install the packages:
+
+```bash
+npm install
+```
+
 - To run the client application:
 
 ```bash
@@ -62,6 +83,7 @@ npm run start
 - [NodeJS](https://github.com/nodejs)
 - [MongoDB](https://github.com/mongodb/mongo)
 - [Solana Web3js](https://solana-labs.github.io/solana-web3.js/modules.html)
+- [Material-UI](material-ui.com)
 
 ## Way forward
 - Multi-asset management
@@ -74,7 +96,7 @@ npm run start
 - Building peer-to-peer system for messaging
 - Connecting with Serum DEX
 
-## Authors
+## Team
 - [Srishilesh P S](https://github.com/srishilesh)
 - [Harshak Krishna](https://github.com/Harshak777)
 - [Bala Kumar S](https://github.com/balasbk)

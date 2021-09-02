@@ -16,16 +16,16 @@ const Chatscreen = () => {
     const [scrollBar, setScrollBar] = useState(0);
     const [change, setChange] = useState(false);
 
-    console.log(userReducerData)
+    //(userReducerData)
 
     useEffect(() => {
 
         let body = {conversationId: selectedConversationIdData.conversation_id};
-        console.log("Conversation "+ selectedConversationIdData.conversation_id);
+        //("Conversation "+ selectedConversationIdData.conversation_id);
 
         axios.post('/messages/sync', body)
         .then(response => {
-        console.log(response);
+        //(response);
         setMessages(response.data);
         });
 
@@ -33,7 +33,7 @@ const Chatscreen = () => {
 
     function syncFunction() {
         let body = {conversationId: selectedConversationIdData.conversation_id};
-        console.log("Conversation "+ selectedConversationIdData.conversation_id);
+        //("Conversation "+ selectedConversationIdData.conversation_id);
 
         axios.post('/messages/sync', body)
         .then(response => {
@@ -56,7 +56,6 @@ const Chatscreen = () => {
         const channel = pusher.subscribe('messages');
         channel.bind('inserted', function(newMessage) {
         // alert(JSON.stringify(newMessage));
-        console.log(newMessage);
         if(selectedConversationIdData.conversation_id == newMessage.conversationId) {
             setMessages([...messages, newMessage]);
             setScrollBar(prev => prev + 1);
@@ -65,8 +64,8 @@ const Chatscreen = () => {
         });
 
         return () => {
-            channel.unbind_all();
-            channel.unsubscribe();
+        channel.unbind_all();
+        channel.unsubscribe();
         }
 
     }, [messages]);

@@ -64,14 +64,14 @@ class newuser extends Component {
   async componentDidMount() {
     const mnemonic = await generateMnemonicAndSeed();
     this.setState({ mnemonic: mnemonic });
-    console.log(this.state.mnemonic);
+    //(this.state.mnemonic);
     const seed = await mnemonicToSeed(this.state.mnemonic.mnemonic);
-    console.log(seed);
+    //(seed);
     const address = await getAddressFromSeed(seed);
     this.setState({ publicaddress: address.publicKey.toString() });
     this.setState({ privateaddress: address.secretKey });
     var pk = new solanaWeb3.Account(this.state.privateaddress);
-    console.log(pk);
+    //(pk);
   }
 
   downloadMnemonic = (mnemonic) => {
@@ -97,11 +97,11 @@ class newuser extends Component {
       password: this.state.password,
       conversationId: []
     };
-    console.log(body);
+    //(body);
 
     axios.post('/user/new', body)
       .then(response => {
-        // console.log(response.data)
+        // //(response.data)
         this.props.history.push("/chat");
       });
 

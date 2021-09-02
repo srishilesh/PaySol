@@ -5,7 +5,7 @@ import Viewtransaction from "./viewtransaction";
 
 const TransactionArea = (props) => {
   const userReducerData = useSelector((state) => state.userReducer);
-  console.log(props.ischange)
+  //(props.ischange)
 
   return (
     <div>

@@ -29,7 +29,7 @@ export const getAccountInfo = async (pubKey) => {
 
   var con = new solanaWeb3.Connection("https://api.devnet.solana.com/")
   var info = await con.getBalance(pubKey)
-  console.log(info)
+  //(info)
   return info
 }
 
@@ -54,7 +54,7 @@ export const Transaction = async (from1, to, amount, address) => {
     transaction,
     [from]
   );
-  console.log("SIGNATURE", signature);
-  console.log("SUCCESS");
+  //("SIGNATURE", signature);
+  //("SUCCESS");
   return signature
 }

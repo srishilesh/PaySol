@@ -22,16 +22,16 @@ class transaction extends Component {
     const to = "9ovWyEHUDhZSxYphWMj5ftTpBnBJCMwF7msWKSpG1tkb"
     const amount = this.state.amount
     var pk = new solanaWeb3.Account(bs.decode(localStorage.getItem('secretkey')))
-    console.log(pk)
+    //(pk)
     const address = pk
     var info = await getAccountInfo(pk.publicKey)
     var info = info / solanaWeb3.LAMPORTS_PER_SOL
     const totalsol = Number(amount) + Number(0.000005)
-    console.log(totalsol)
-    console.log(info)
+    //(totalsol)
+    //(info)
     if (info >= totalsol) {
       var status = await Transaction(from, to, amount, bs.decode(localStorage.getItem('secretkey')))
-      console.log(status)
+      //(status)
     }
     else
       alert("insufficient balance")

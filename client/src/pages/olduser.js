@@ -67,12 +67,12 @@ class olduser extends Component {
   };
   getpublicaddress = async () => {
     const seed = await mnemonicToSeed(this.state.seed);
-    console.log(seed);
+    //(seed);
     const address = await getAddressFromSeed(seed);
-    console.log(address.secretKey);
+    //(address.secretKey);
     this.setState({ publicaddress: address.publicKey.toString() });
     this.setState({ privateaddress: address.secretKey });
-    console.log(this.state.publicaddress);
+    //(this.state.publicaddress);
     const info = await getAccountInfo(address.publicKey);
     localStorage.setItem("secretkey", bs.encode(this.state.privateaddress));
 

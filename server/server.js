@@ -40,13 +40,13 @@ mongoose.connect(connection_url, {
 const db = mongoose.connection;
 
 db.once('open', () => {
-    console.log("DB connected");
+    //("DB connected");
 
     const msgCollection = db.collection('messagecontents');
     const changeStream = msgCollection.watch();
 
     changeStream.on('change', (change) => {
-        console.log("change occured", change);
+        //("change occured", change);
 
         if (change.operationType === 'insert') {
             const messageDetails = change.fullDocument;
@@ -59,7 +59,7 @@ db.once('open', () => {
                 amount: messageDetails.amount
             });
         } else {
-            console.log("Error triggering Pusher");
+            //("Error triggering Pusher");
         }
     });
 
@@ -67,7 +67,7 @@ db.once('open', () => {
     const changeStreamConversation = conCollection.watch(); 
 
     changeStreamConversation.on('change', (change) => {
-        console.log("change occured", change);
+        //("change occured", change);
 
         if (change.operationType === 'insert') {
             const conversationDetails = change.fullDocument;
@@ -77,7 +77,7 @@ db.once('open', () => {
                 participants: conversationDetails.participants
             });
         } else {
-            console.log("Error triggering Pusher");
+            //("Error triggering Pusher");
         }
     });
 
@@ -176,7 +176,7 @@ app.post('/conversation/new', (req, res) => {
             res.status(500).send(err)
         } else {
             conversationId = data;
-            console.log(conversationId);
+            //(conversationId);
             setConversationId(conversationId._id, sender);
             setConversationId(conversationId._id, receiver);
             res.status(200).send(`new conversation created: \n ${data}`)
@@ -193,8 +193,8 @@ function setConversationId(conversationId, user) {
     User.findOneAndUpdate(query, {$push: newData}, {upsert: true}, function(err, data) {
         // if (err) return res.send(500, {error: err});
         // return res.status(200).send(`conversation updated: \n ${data}`);
-        console.log(data);
-        console.log(err);
+        //(data);
+        //(err);
     });
 }
 

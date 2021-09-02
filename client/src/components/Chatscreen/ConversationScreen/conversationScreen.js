@@ -15,7 +15,7 @@ const ConversationScreen = ({ messages,  scrollBar,changeFunction}) => {
     const userReducerData = useSelector(state => state.userReducer);
     const disabled = (selectedConversationIdData.toaddress === "");
     const conversationsData = useSelector(state => state.conversationsReducer);
-    console.log(conversationsData);
+    //(conversationsData);
 
     
     useEffect(() => {        

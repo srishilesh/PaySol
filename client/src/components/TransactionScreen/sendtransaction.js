@@ -52,24 +52,26 @@ export default function Sendtransaction(props) {
 
   const selectedConversationIdData = useSelector(state => state.selectedConversationReducer)
   const sendtransaction = async () => {
-
+    if(Number(value)<=0)
+    alert("invalid number")
+    else{
     const from = userReducerData._id
     const to = selectedConversationIdData.toaddress
     const amount = value
     var pk = new solanaWeb3.Account(bs.decode(localStorage.getItem('secretkey')))
-    console.log(pk)
+    //(pk)
     const address = pk
     var info = await getAccountInfo(pk.publicKey)
     var info = info / solanaWeb3.LAMPORTS_PER_SOL
     const totalsol = Number(amount) + Number(0.000005)
-    // console.log(totalsol)
-    // console.log(info)
-    // console.log(to)
+    // //(totalsol)
+    // //(info)
+    // //(to)
     if (info >= totalsol) {
       setLoading(false)
       var status = await Transaction(from, to, amount, bs.decode(localStorage.getItem('secretkey')))
       setNotification(1);
-      console.log(status);
+      //(status);
       axios.post('/messages/new', {
         "message": "Success",
         "sender_id": userReducerData._id,
@@ -92,6 +94,7 @@ export default function Sendtransaction(props) {
 
     });
   }
+    }
 }
 
   return (
@@ -134,6 +137,7 @@ export default function Sendtransaction(props) {
                     variant="outlined"
                     onChange={inputsHandler}
                     required
+                   
                   />
 
                   <br />

@@ -19,8 +19,8 @@ class landingpage extends Component {
       var pk = new solanaWeb3.Account(
         bs.decode(localStorage.getItem("secretkey"))
       );
-      console.log(pk);
-      console.log(this.state.ispublickey);
+      //(pk);
+      //(this.state.ispublickey);
       this.setState({ ispublickey: true, pk: pk.publicKey });
     }
   }

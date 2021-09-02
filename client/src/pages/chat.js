@@ -107,13 +107,13 @@ const Chat = (props) => {
       var pk = new solanaWeb3.Account(
         bs.decode(localStorage.getItem("secretkey"))
       );
-      console.log(localStorage.getItem("secretkey"));
+      //(localStorage.getItem("secretkey"));
       let detail = {
         _id: pk.publicKey.toString(),
         name: localStorage.getItem("name"),
         pk: pk.publicKey
       }
-      console.log(detail)
+      //(detail)
       dispatch({ type: SET_USER, payload: detail });
       setLoading(true)
     }

@@ -50,7 +50,7 @@ const ConversationManager = (props) => {
     }
 
     const handleNewChat = () => {
-        console.log("New chat");
+        //("New chat");
 
         let body = {
             _id: value
@@ -73,14 +73,14 @@ const ConversationManager = (props) => {
 
                     axios.post('/conversation/new', body)
                         .then(response => {
-                            console.log(response);
+                            //(response);
                         })
                 }
                 else
                     alert("User does not exist")
             })
             .catch(error => {
-                console.log(error)
+                //(error)
             }
             )
 
@@ -100,7 +100,7 @@ const ConversationManager = (props) => {
 
         axios.post('/user/conversations', { _id: userReducerData._id })
             .then(response => {
-                console.log("constructor");
+                //("constructor");
                 setConversationData(response.data);
                 participantsFormatter(response.data);
 
@@ -137,7 +137,7 @@ const ConversationManager = (props) => {
     function participantsFormatter(response) {
         let participantsArray = [];
 
-        console.log(response)
+        //(response)
 
         response.map((participants, index1) => {
             participants.participants.map((participant, index2) => {
@@ -146,7 +146,7 @@ const ConversationManager = (props) => {
             })
         })
 
-        console.log(participantsArray)
+        //(participantsArray)
 
         setConversation(participantsArray.reverse());
         dispatch({type: SET_CONVERSATIONS, payload: participantsArray})

@@ -123,11 +123,11 @@ class newuser extends Component {
             {this.state.isdownladed ? (
               <div style={{ justifyContent: "center" }}>
                 <Typography component="h1" variant="h4" align="center">
-                  PAY SOL
+                  PaySol
                 </Typography>
                 <Typography variant="h6" align="center" paragraph>
                 Pay and get paid with crypto <br/>
-                Download and keep the  key safe for future use
+                Download and keep the key safe for future use
                 </Typography>
                 <TextField
                   id="outlined-multiline-static"
@@ -168,7 +168,7 @@ class newuser extends Component {
                       defaultValue={this.state.name}
                       variant="outlined"
                       onChange={this.handleChange}
-                      helperText="Type anonus name"
+                      helperText="Type anonymous name"
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -193,7 +193,7 @@ class newuser extends Component {
                       this.savetolocalstorage();
                     }}
                   >
-                    contiune
+                    continue
                   </Button>
                 </div>
               </div>

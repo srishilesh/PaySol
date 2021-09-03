@@ -88,7 +88,7 @@ npm run start
 ## Way forward
 - Multi-asset management
 - Build reward programs for the users
-- Build ERC-20 token to redeem the rewards
+- Build SPL token to redeem the rewards
 - Enhancing the Chat UI
 - Advertising products/services in the marketplace
 - Subscription based billing and invoicing of payments

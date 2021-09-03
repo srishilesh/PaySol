@@ -3,7 +3,7 @@
 
 ## Project Description
 
-A chat enabled non-custodian cryptocurrency wallet for transacting SOL tokens.
+PaySol strives to facilitate people or businesses to connect and transfer crypto assets easily through a scan and pay system to enable a secured and fast transfer.
 
 ### Features
 - Web based non-custodial crypto wallet

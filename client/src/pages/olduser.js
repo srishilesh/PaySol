@@ -142,7 +142,7 @@ class olduser extends Component {
                     this.getpublicaddress();
                   }}
                 >
-                  contiune
+                  continue
                 </Button>
               </div>
             </div>

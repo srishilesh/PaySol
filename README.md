@@ -3,7 +3,7 @@
 
 ## Project Description
 
-PaySol strives to facilitate people or businesses to connect and transfer crypto assets easily through a scan and pay system to enable a secured and fast transfer.
+PaySol is a chat based non-custodial crypto wallet that empower users to transact SOLs via P2P, keep track of financial records, advertise offerings, earn SPL tokens for every transaction.
 
 ### Features
 - Web based non-custodial crypto wallet
